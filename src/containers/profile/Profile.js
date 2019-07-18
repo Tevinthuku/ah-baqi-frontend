@@ -15,7 +15,7 @@ export class UnconnectedProfile extends Component {
   }
 
   render() {
-    const { profile, userArticles, articleActions } = this.props;  // eslint-disable-line
+    const { profile, userArticles, articleActions, history } = this.props;  // eslint-disable-line
     return (
       <div className="profile-container">
         <div className="profile-container-wrapper">
@@ -23,6 +23,7 @@ export class UnconnectedProfile extends Component {
             myProfile={profile}
             userArticles={userArticles}
             articleActions={articleActions}
+            history={history}
           />
         </div>
       </div>

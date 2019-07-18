@@ -14,7 +14,12 @@ const UserProfile = (props) => {
     </span>
   );
 
-  const profileRenderLogic = ({ myProfile, userArticles, articleActions }) => { // eslint-disable-line
+  const profileRenderLogic = ({ myProfile, userArticles, articleActions, history }) => { // eslint-disable-line
+    const handleClick = (slug) => {
+      const urlTo = `/articles/${slug}`;
+      articleActions('get-one', slug);
+      history.push(urlTo);
+    };
     return (
       <div>
         <div className="profile-header-component">
@@ -58,7 +63,6 @@ const UserProfile = (props) => {
               <List.Item
                 key={item.title}
                 actions={[
-                  <IconText type="star-o" text={item.rating} />,
                   <IconText type="heart" text={item.likes} />,
                   <IconText type="message" text={item.comments.length} />,
                   <span onClick={() => articleActions('edit', item.slug)}>
@@ -80,15 +84,16 @@ const UserProfile = (props) => {
                 extra={(
                   <img
                     width={270}
+                    height={170}
                     alt="article"
-                    // src={item.image}
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                    src={item.image}
+                    // src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                   />
 )}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={myProfile.profile.image} />}
-                  title={<a href={item.href}>{item.title}</a>}
+                  title={<a onClick={() => handleClick(item.slug)}>{item.title}</a>}
                   description={item.description}
                 />
                 {item.content}

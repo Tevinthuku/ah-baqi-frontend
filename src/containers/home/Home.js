@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-
-import { Redirect } from 'react-router-dom';
 
 import articleActions from '../../actions/articleActions';
 
@@ -18,7 +15,7 @@ class Home extends Component {
 
   handleClick = (slug) => {
     const urlTo = '/articles/' + slug;
-    this.props.articleActions('get-one', slug = slug);
+    this.props.articleActions('get-one', slug);
     this.props.history.push(urlTo);
   }
 

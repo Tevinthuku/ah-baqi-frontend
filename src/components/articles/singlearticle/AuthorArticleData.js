@@ -3,7 +3,9 @@ import {
   Row, Col, Button, Popconfirm,
 } from 'antd';
 
-const AuthorHeadData = ({ articleActions, articleData, history }) => (
+const AuthorHeadData = ({
+  articleActions, articleData, history, editClick,
+}) => (
   <div>
     <Row>
       <Col span={3}>
@@ -28,7 +30,7 @@ const AuthorHeadData = ({ articleActions, articleData, history }) => (
         </Row>
       </Col>
       <Col span={6} offset={5}>
-        <Button onClick={() => history.push('/articles/update/')}>Edit</Button>
+        <Button onClick={event => editClick(event)}>Edit</Button>
         {' '}
         <Popconfirm
           title="Are you sure you want to delete this article?"

@@ -7,18 +7,26 @@ import articleActions from '../../actions/articleActions';
 import SingleArticle from '../../components/articles/SingleArticle';
 
 class SingleArticleContainer extends Component {
-    componentWillMount() {
-        if (!this.props.articleData.id) {
-            const slug = this.props.history.location.pathname.split('/')[2]
-            this.props.articleActions('get-one', slug)
-        }
+  componentWillMount() {
+    if (!this.props.articleData.id) {
+      const slug = this.props.history.location.pathname.split('/')[2];
+      this.props.articleActions('get-one', slug);
     }
-    render() {
-        const { articleData, articleActions, history } = this.props;  // eslint-disable-line
+  }
+
+  handleEditClick = (event) => {
+    console.log(event.target);
+    const { slug } = this.props.articleData;
+    this.props.articleActions('get-one', slug);
+    this.props.history.push('/articles/update');
+  }
+
+  render() {
+    const { articleData, articleActions, history } = this.props;  // eslint-disable-line
 
     let singleArticleData = <Skeleton active />;
     if (articleData.id) {
-      singleArticleData = <SingleArticle article={articleData} articleActions={articleActions} history={history} />;
+      singleArticleData = <SingleArticle editClick={this.handleEditClick} article={articleData} articleActions={articleActions} history={history} />;
     }
 
     return (

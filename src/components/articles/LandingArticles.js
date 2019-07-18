@@ -6,20 +6,21 @@ import LeftLandindArticle from './landingPage/LeftLandindArticle';
 import MiddleLandingArticles from './landingPage/MiddleLandingArticles';
 
 const LandingArticles = (props) => {
-    console.log(props);
-    const { leftArticle, middleArticles, handleClick } = props;
+  console.log(props);
+  const { leftArticle, middleArticles, handleClick } = props;
 
-    return (
-        <Row>
-            <LeftLandindArticle article={leftArticle}
-                clicked={handleClick}
-            />
-            <MiddleLandingArticles articles={middleArticles}
-                clicked={handleClick}
-            />
-        </Row>
-    );
-}
+  return (
+    <Row>
+      <LeftLandindArticle
+        article={leftArticle}
+        clicked={handleClick}
+      />
+      <MiddleLandingArticles
+        articles={middleArticles}
+        clicked={handleClick}
+      />
+    </Row>
+  );
+};
 
 export default LandingArticles;
-

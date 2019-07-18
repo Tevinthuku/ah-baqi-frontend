@@ -5,6 +5,8 @@ import Header from './containers/header/Header';
 import Profile from './containers/profile/Profile';
 import PasswordReset from './containers/resetpassword/resetPassword';
 import ConfrimReset from './containers/resetpassword/resetConfirm';
+import CreateNewArticle from './containers/articles/NewArticle';
+import SingleArticleContainer from './containers/articles/SingleArticle';
 
 const Routes = () => (
   <div>
@@ -15,6 +17,8 @@ const Routes = () => (
         <Route exact path="/resetconfirm/:token" component={ConfrimReset} />
         <Route exact path="/passwordreset" component={PasswordReset} />
         <Route path="/profile" exact component={Profile} />
+        <Route path="/articles/new" exact component={CreateNewArticle} />
+        <Route path="/articles/:slug" exact component={SingleArticleContainer} />
       </Switch>
     </BrowserRouter>
   </div>

@@ -1,6 +1,6 @@
 import { instance } from '../utils/axios';
 import handleMessages from '../utils/messages';
-import { getUserProfile } from './profile/profile';
+import { getUserProfile } from './profile';
 
 import actionTypes from './types';
 

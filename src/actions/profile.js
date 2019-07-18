@@ -1,11 +1,6 @@
-import { instance } from '../../utils/axios';
+import { instance } from '../utils/axios';
+import actionTypes from './types';
 
-
-export const actionTypes = {
-  USER_PROFILE: 'USER_PROFILE',
-  EDIT_USER_PROFILE: 'EDIT_USER_PROFILE',
-  EDIT_USER_PROFILE_ERROR: 'EDIT_USER_PROFILE_ERROR',
-};
 
 export const getUserProfile = username => async (dispatch) => {
   try {

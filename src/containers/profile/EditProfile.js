@@ -4,7 +4,7 @@ import { Button, Icon } from 'antd';
 import { bindActionCreators } from 'redux';
 import EditProfileForm from '../../components/profile/forms/EditProfileForm';
 
-import { editUserProfile } from '../../actions/profile/profile';
+import { editUserProfile } from '../../actions/profile';
 import { displayModalActions, hideModalActions } from '../../actions/modalActions';
 
 export class UnconnectedEditProfile extends React.Component {

@@ -4,7 +4,7 @@ import UserProfile from '../../components/profile/UserProfile';
 import './profile.scss';
 
 
-import { getUserProfile } from '../../actions/profile/profile';
+import { getUserProfile } from '../../actions/profile';
 
 export class UnconnectedProfile extends Component {
   componentDidMount() {

@@ -1,0 +1,44 @@
+.ant-btn-danger {
+  font-size: 10px;
+  height: 30px;
+  margin-left: 8px;
+  padding: initial;
+  width: 89px;
+}
+.add-comment {
+  font-size: 10px;
+  height: 30px;
+  padding: initial;
+  width: 89px;
+}
+.comment-rating {
+  font-size: 30px;
+  margin-top: 5px;
+
+  &-dislikes {
+    cursor: pointer;
+    margin-left: 25px;
+  }
+}
+
+.delete-icon {
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.dropdown-icon {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.edit-field {
+  padding-left: 77px;
+}
+
+.comment-message,.nested-comment-message, .likes-message {
+  color: red;
+}

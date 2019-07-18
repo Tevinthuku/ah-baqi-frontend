@@ -13,9 +13,9 @@ const articleActions = (action, slug = "", data = "") => async (dispatch) => {
                     type: actionTypes.EDIT_ARTICLE,
                     payload: response.data,
                 });
-                handleMessages('success', 'Article successfully edited ??');
+                handleMessages('success', 'Article successfully edited ðŸ˜„');
             } catch (error) {
-                handleMessages('error', 'Failed ??');
+                handleMessages('error', 'Failed ðŸ˜¬');
             }
             break;
         case 'delete':
@@ -25,9 +25,9 @@ const articleActions = (action, slug = "", data = "") => async (dispatch) => {
                     type: actionTypes.DELETE_ARTICLE,
                     payload: response.data,
                 });
-                handleMessages('success', 'Article successfully deleted ??');
+                handleMessages('success', 'Article successfully deleted ðŸ˜„');
             } catch (error) {
-                handleMessages('error', 'Failed ??');
+                handleMessages('error', 'Failed ðŸ˜¬');
             }
             break;
         case 'create':
@@ -81,6 +81,6 @@ const articleActions = (action, slug = "", data = "") => async (dispatch) => {
         default:
             return {};
     }
-};
+}
 
 export default articleActions;

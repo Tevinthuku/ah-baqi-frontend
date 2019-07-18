@@ -1,6 +1,6 @@
 import { instance } from '../../utils/axios';
 import store from '../../utils/testUtils';
-import { getUserProfile, editUserProfile } from '../profile/profile';
+import { getUserProfile, editUserProfile } from '../profileActions';
 
 jest.spyOn(instance, 'get');
 jest.spyOn(instance, 'patch');

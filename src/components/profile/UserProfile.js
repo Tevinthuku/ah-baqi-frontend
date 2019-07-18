@@ -72,7 +72,7 @@ const UserProfile = (props) => {
                   </span>,
                   <Popconfirm
                     title="Are you sure you want to delete this article?"
-                    onConfirm={() => articleActions('delete', item.slug)}
+                    onConfirm={() => articleActions('delete', item.slug, history)}
                     okText="Yes"
                     cancelText="No"
                   >

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NewArticleForm from '../../components/articles/NewArticleForm';
 import { connect } from 'react-redux';
 import articleActions from '../../actions/articleActions';
-import { Redirect } from 'react-router-dom';
 
 class CreateNewArticle extends Component {
 
@@ -54,11 +53,11 @@ class CreateNewArticle extends Component {
         } else {
             data = { title, description, body, tagList }
         }
-        this.props.articleActions('create', data = data)
+        console.log(data)
+        this.props.articleActions('create', '', this.props.history, data)
     }
 
     render() {
-        console.log(isLoggedin)
         const { isLoggedin } = this.props;
         return (
             <div>

@@ -1,6 +1,15 @@
 $text-black: #000000;
 $text-blackish: #00000099;
 
+.left-art-desc {
+    margin-bottom: 8px;
+}
+
+.left-art-title {
+    margin: 0 0 8px 0;
+    padding: 0;
+}
+
 .landing-article-container {
     max-height: 350px;
     padding: 5px;
@@ -8,8 +17,13 @@ $text-blackish: #00000099;
 }
 
 .mid-landing-article {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
     height: 90px;
+}
+
+.mid-art-title {
+    margin-top: 10px;
 }
 
 .landing-article-image-container {
@@ -21,10 +35,11 @@ $text-blackish: #00000099;
 .landing-article-image {
     height: 200px;
     width: 100%;
+    object-fit: contain;
 }
 
 .landing-article-image-mid-cont {
-    width: 90px;
+    width: 100px;
     height: 90px;
 }
 

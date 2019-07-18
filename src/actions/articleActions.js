@@ -31,6 +31,7 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
         history.push('/profile')
         handleMessages('success', 'Article successfully deleted 😄');
       } catch (error) {
+        console.log(error)
         handleMessages('error', 'Failed 😬');
       }
       break;
@@ -41,14 +42,14 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
           '/articles/',
           { article: data },
         );
-
         dispatch({
           type: actionTypes.CREATE_ARTICLE,
           payload: response.data,
         });
         handleMessages('success', 'Your article was successfully created ??');
+        history.push(`/articles/${response.data.slug}`);
       } catch (error) {
-        handleMessages('error', 'Oops!! ?? , an error occured, please try again');
+        handleMessages('error', 'Oops!! 🤭 , an error occured, please try again');
       }
       break;
 
@@ -65,7 +66,7 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
           payload: response.data,
         });
       } catch (error) {
-        handleMessages('error', 'Oops!! ?? , an error occured, please try again');
+        handleMessages('error', 'Oops!! 🤭 , an error occured, please try again');
       }
       break;
 
@@ -79,7 +80,7 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
           payload: response.data,
         });
       } catch (error) {
-        handleMessages('error', 'Oops!! ?? , an error occured, please try again');
+        handleMessages('error', 'Oops!! 🤭 , an error occured, please try again');
       }
       break;
     default:

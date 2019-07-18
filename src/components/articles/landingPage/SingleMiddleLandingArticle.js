@@ -3,19 +3,20 @@ import React from 'react';
 import { Col, Row, Icon } from 'antd';
 
 const SingleMidLandingArticle = (props) => {
-    const { } = props;
+    const { article, clicked } = props;
+    const defImage = "https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg";
 
     return (
-        <Col span={24} className="mid-landing-article">
+        <Col span={24} className="mid-landing-article" onClick={() => clicked(article.slug)}>
             <Row>
                 <Col span={7} className="landing-article-image-mid-cont">
-                    <img src="https://res.cloudinary.com/zonecc/image/upload/v1563334380/dummy%20ah/hack-creativity_gzyqqp.jpg" alt="Article Image" className="landing-article-image-mid"
+                    <img src={article.image ? article.image : defImage} alt="Article Image" className="landing-article-image-mid"
                     />
                 </Col>
                 <Col span={17}>
                     <Row className="mid-article-data">
                         <Col span={24}>
-                            <h4>Pence, Brown Men, and the Racist Protection of White Women</h4>
+                            <h4 className="mid-art-title">{article.title}</h4>
                         </Col>
                         <Row>
                             <Col span={24}

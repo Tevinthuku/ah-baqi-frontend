@@ -11,7 +11,6 @@ const NewArticleForm = (props) => {
     const handleUploadImages = (image) => {
         image = image[0]
         const cloudinaryAPIKey = 896213827437316;
-        console.log(image)
         let reader = new FileReader();
         reader.onloadend = function () {
             image = reader.result; //this is an ArrayBuffer
@@ -28,9 +27,9 @@ const NewArticleForm = (props) => {
             { headers: { "X-Requested-With": "XMLHttpRequest" } }
         )
             .then(response => {
-                console.log(response.data)
-                imageUrl = response.data.secure_url;
-                handleChange(imageUrl, image)
+                console.log(response.data.url)
+                imageUrl = response.data.url;
+                handleChange(imageUrl, 'image')
             })
             .catch(error => console.error(error))
 
@@ -44,7 +43,6 @@ const NewArticleForm = (props) => {
                         role="form"
                         className="article-form"
                         onSubmit={(event) => handleSubmit(event)}
-                        encType="multipart/form-data"
                     >
                         <div className="form-group">
                             <input type="text"

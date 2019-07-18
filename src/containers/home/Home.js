@@ -17,8 +17,8 @@ class Home extends Component {
   }
 
   handleClick = (slug) => {
+    this.props.articleData.id = 0;
     const urlTo = '/articles/' + slug;
-    this.props.articleActions('get-one', slug = slug);
     this.props.history.push(urlTo);
   }
 
@@ -31,15 +31,14 @@ class Home extends Component {
       displayHomeData = (
         <div>
           <LandingArticles
-            rightArticle={articles[0]}
-            middleArticles={articles.slice(1, 3)}
-            leftArticle={articles[4]}
+            middleArticles={articles.slice(1, 4)}
+            leftArticle={articles[0]}
             handleClick={this.handleClick}
           />
           <div className="shadow"></div>
           <Row>
             <Col span={15}>
-              <FeaturedArticles />
+              <FeaturedArticles handleClick={this.handleClick} articles={articles.slice(4)} />
             </Col>
             <Col span={8} push={1}>
               Popular articles
@@ -59,6 +58,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   articles: state.article.articles,
+  articleData: state.article.articleData,
   nextPage: state.article.nextPage,
   previousPage: state.article.articles,
   articleCount: state.article.articleCount,

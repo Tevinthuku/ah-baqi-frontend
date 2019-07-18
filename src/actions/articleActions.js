@@ -33,6 +33,7 @@ const articleActions = (action, slug = "", data = "") => async (dispatch) => {
         case 'create':
             try {
                 handleMessages('loading', 'Your post is being uploaded... ??');
+                console.log(data)
                 const response = await instance.post(
                     '/articles/',
                     { article: data },

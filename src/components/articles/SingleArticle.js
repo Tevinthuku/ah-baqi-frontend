@@ -25,9 +25,12 @@ const SingleArticle = (props) => {
                                 {article.escription}
                             </div>
                         </Col>
-                        {article.image ? <Col span={24} className="general-article-cols" className="article-image">
-                            <img src={article.image} alt="Article Image" />
-                        </Col> : null}
+                        {article.image ?
+                            <Col span={24} className="general-article-cols" className="article-image">
+                                <img src={article.image} alt="Article Image" />
+                            </Col>
+                            : null
+                        }
 
                         <Col span={24} className="general-article-cols">
                             <div className="article-body" dangerouslySetInnerHTML={{ __html: article.body }}>

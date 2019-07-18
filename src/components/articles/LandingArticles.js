@@ -7,11 +7,11 @@ import MiddleLandingArticles from './landingPage/MiddleLandingArticles';
 
 const LandingArticles = (props) => {
     console.log(props);
-    const { rightArticle, middleArticles, leftArticle, handleClick } = props;
+    const { leftArticle, middleArticles, handleClick } = props;
 
     return (
         <Row>
-            <LeftLandindArticle article={rightArticle}
+            <LeftLandindArticle article={leftArticle}
                 clicked={handleClick}
             />
             <MiddleLandingArticles articles={middleArticles}

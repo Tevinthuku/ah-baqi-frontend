@@ -9,10 +9,8 @@ import SingleArticle from '../../components/articles/SingleArticle';
 class SingleArticleContainer extends Component {
     componentWillMount() {
         if (!this.props.articleData.id) {
-            console.log(this.props.history.location);
             const slug = this.props.history.location.pathname.split('/')[2]
             this.props.articleActions('get-one', slug)
-            console.log(slug);
         }
     }
     render() {

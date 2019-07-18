@@ -4,7 +4,7 @@ import {
 } from 'antd';
 
 const AuthorHeadData = ({ articleActions, articleData, history }) => (
-  <div>
+  <div data-test="author-data">
     <Row>
       <Col span={3}>
         <img className="author-image" src="https://res.cloudinary.com/zonecc/image/upload/v1563334380/dummy%20ah/hack-creativity_gzyqqp.jpg" />

@@ -28,10 +28,9 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
           type: actionTypes.FETCH_USER_ARTICLES,
           payload: response.data,
         });
-        history.push('/profile')
+        history.push('/profile');
         handleMessages('success', 'Article successfully deleted 😄');
       } catch (error) {
-        console.log(error)
         handleMessages('error', 'Failed 😬');
       }
       break;
@@ -58,8 +57,6 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
         response = await baseAxios.get(
           `/articles/${slug}/`,
         );
-
-        console.log(response.data);
 
         dispatch({
           type: actionTypes.GET_SINGLE_ARTICLES,

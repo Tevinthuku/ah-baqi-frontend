@@ -7,13 +7,14 @@ import articleActions from '../../actions/articleActions';
 import SingleArticle from '../../components/articles/SingleArticle';
 
 class SingleArticleContainer extends Component {
-    componentWillMount() {
-        if (!this.props.articleData.id) {
-            const slug = this.props.history.location.pathname.split('/')[2]
-            this.props.articleActions('get-one', slug)
-        }
+  componentWillMount() {
+    if (!this.props.articleData.id) {
+      const slug = this.props.history.location.pathname.split('/')[2];
+      this.props.articleActions('get-one', slug);
     }
-    render() {
+  }
+
+  render() {
         const { articleData, articleActions, history } = this.props;  // eslint-disable-line
 
     let singleArticleData = <Skeleton active />;

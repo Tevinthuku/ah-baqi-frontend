@@ -24,19 +24,19 @@ const initialState = {
     likePopularity: '',
     dislikes: 0,
     likes: 0,
-  }
+  },
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.CREATE_ARTICLE:
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         articleData: { ...action.payload },
       };
     case actionTypes.GET_ALL_ARTICLES:
-      console.log(action)
+      console.log(action);
       return {
         ...state,
         articles: action.payload.results,

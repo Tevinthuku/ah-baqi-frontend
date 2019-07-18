@@ -5,12 +5,16 @@ import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
 const SingleArticle = ({ article, articleActions, history }) => (
-  <div>
+  <div data-test="single-article">
     <Row>
       <Col span={18} offset={3}>
         <Row>
           <Col span={24} className="general-article-cols">
-            <AuthorHeadData articleData={article} articleActions={articleActions} history={history} />
+            <AuthorHeadData
+              articleData={article}
+              articleActions={articleActions}
+              history={history}
+            />
           </Col>
           <Col span={24} className="general-article-cols">
             <p className="article-title">

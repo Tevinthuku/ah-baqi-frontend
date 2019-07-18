@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Popconfirm, Icon } from 'antd';
+import {
+  Layout, Menu, Popconfirm, Icon,
+} from 'antd';
 import './navbar.scss';
 
 const { Header } = Layout;

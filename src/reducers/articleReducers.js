@@ -3,6 +3,7 @@ import actionTypes from '../actions/types';
 const initialState = {
   loading: false,
   error: null,
+  articleCount: 0,
   articles: [],
   nextPage: null,
   previousPage: null,
@@ -23,26 +24,30 @@ const initialState = {
     likePopularity: '',
     dislikes: 0,
     likes: 0,
-  },
+  }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.CREATE_ARTICLE:
+      console.log(action.payload)
       return {
         ...state,
+        articleData: { ...action.payload },
       };
     case actionTypes.GET_ALL_ARTICLES:
+      console.log(action)
       return {
         ...state,
-        articles: action.articles,
-        nextPage: action.nextPage,
-        previousPage: action.articles,
+        articles: action.payload.results,
+        nextPage: action.payload.next,
+        previousPage: action.payload.previous,
+        articleCount: action.payload.count,
       };
     case actionTypes.GET_SINGLE_ARTICLES:
       return {
         ...state,
-        articleData: action.articleData,
+        articleData: { ...action.payload },
       };
     case actionTypes.EDIT_ARTICLE:
       return {

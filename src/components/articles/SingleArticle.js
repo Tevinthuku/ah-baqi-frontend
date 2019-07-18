@@ -1,45 +1,61 @@
-import React, { Component } from 'react';
-import { Skeleton } from 'antd';
-import { instance } from '../../utils/axios';
+import React from 'react';
+import { Row, Col } from 'antd';
 
-class SingleArticle extends Component {
-  state = {
-    articles: null,
-  }
+import AuthorHeadData from './singlearticle/AuthorArticleData';
+import './landingPage/Singlearticle.scss';
 
-  async componentDidMount() {
-    const response = await instance.get('/articles/dummy-6_nousername/');
-    this.setState({
-      articles: response.data,
-    });
-  }
-
-  renderArt = () => {
-    const art = this.state.articles;
+const SingleArticle = (props) => {
+    console.log()
+    const { article } = props;
     return (
-      art ? (
-        <div key={art.id}>
-          <h1>{art.title}</h1>
-          <p>{art.body}</p>
-          <button>Edit</button>
-          <button>Delete</button>
+        <div>
+            <Row>
+                <Col span={18} offset={3}>
+                    <Row>
+                        <Col span={24} className="general-article-cols">
+                            <AuthorHeadData />
+                        </Col>
+                        <Col span={24} className="general-article-cols">
+                            <p className="article-title">
+                                {article.title}
+                            </p>
+                        </Col>
+                        <Col span={24} className="general-article-cols">
+                            <div className="article-description">
+                                {article.escription}
+                            </div>
+                        </Col>
+                        {article.image ? <Col span={24} className="general-article-cols" className="article-image">
+                            <img src={article.image} alt="Article Image" />
+                        </Col> : null}
+
+                        <Col span={24} className="general-article-cols">
+                            <div className="article-body" dangerouslySetInnerHTML={{ __html: article.body }}>
+                            </div>
+                        </Col>
+                        <Col span={24} className="general-article-cols">
+                            <Row>
+                                <Col className="article-liking" span={4}>Liking</Col>
+                                <Col className="article-liking" push={16} span={4}>
+                                    Rating
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span={24} className="general-article-cols">
+                            <Row>
+                                <Col className="parent-comment">
+                                    <Col>Parent Comment</Col>
+                                    <Row>
+                                        <Col span={20} push={4}>Child Comment</Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
         </div>
-      ) : (
-        <Skeleton active />
-      )
     );
-  }
-
-  render() {
-    return (
-      <div>
-        <hr />
-        Welcome to the home page
-        {this.renderArt()}
-
-      </div>
-    );
-  }
 }
 
 export default SingleArticle;

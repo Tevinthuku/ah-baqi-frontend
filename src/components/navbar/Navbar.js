@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Popconfirm } from 'antd';
+import { Layout, Menu, Popconfirm, Icon } from 'antd';
 import './navbar.scss';
 
 const { Header } = Layout;
@@ -15,6 +15,12 @@ const Navbar = ({ clickedLogin = null, clickedSignup = null, logOut = null }) =>
       {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (
           <Menu mode="horizontal" style={{ float: 'right' }} data-test="authenticated-menu">
+            <Item>
+              <Link to="/articles/new">
+                <Icon type="plus-circle" className="icon-blue" />
+                <span className="nav-text">New Article</span>
+              </Link>
+            </Item>
             <Item>
               <div className="navbar-profile-pic">
                 <Link to="/profile">

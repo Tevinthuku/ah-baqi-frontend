@@ -23,15 +23,15 @@ const SingleFeaturedArticle = (props) => {
               span={24}
               className="mid-article-author"
             >
-Mona Eltahawy in ZORA
+              Mona Eltahawy in ZORA
             </Col>
             <Row className="mid-article-read-date">
               <Col span={24}>
                 <span>
-Jul 17 .
+                  Jul 17 .
                   {article.reading_time}
                   {' '}
-read
+                  read
                   {' '}
                 </span>
                 <span className="rating-icons-pos">

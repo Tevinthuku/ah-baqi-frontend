@@ -5,7 +5,7 @@ import Header from './containers/header/Header';
 import Profile from './containers/profile/Profile';
 import PasswordReset from './containers/resetpassword/resetPassword';
 import ConfrimReset from './containers/resetpassword/resetConfirm';
-import SingleArticle from './components/articles/SingleArticle'
+import SingleArticle from './components/articles/SingleArticle';
 
 const Routes = () => (
   <div>

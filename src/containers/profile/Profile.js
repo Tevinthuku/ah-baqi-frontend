@@ -2,25 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../../components/profile/UserProfile';
 import './profile.scss';
-
-
+import articleActions from '../../actions/articleActions';
 import { getUserProfile, getUserArticles } from '../../actions/profileActions';
 
 export class UnconnectedProfile extends Component {
   componentDidMount() {
     const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('user_id')
+    const userId = localStorage.getItem('user_id');
     const { getUserProfile, getUserArticles } = this.props; // eslint-disable-line
     getUserProfile(username);
     getUserArticles(userId);
   }
 
   render() {
-    const { profile, userArticles } = this.props;
+    const { profile, userArticles, articleActions } = this.props;  // eslint-disable-line
     return (
       <div className="profile-container">
         <div className="profile-container-wrapper">
-          <UserProfile myProfile={profile} userArticles={userArticles} />
+          <UserProfile
+            myProfile={profile}
+            userArticles={userArticles}
+            articleActions={articleActions}
+          />
         </div>
       </div>
 
@@ -33,5 +36,5 @@ const mapStateToProps = ({ userProfile }) => ({
 });
 
 export default connect(mapStateToProps, {
-  getUserProfile, getUserArticles,
+  getUserProfile, getUserArticles, articleActions,
 })(UnconnectedProfile);

@@ -9,7 +9,6 @@ class SingleArticle extends Component {
 
   async componentDidMount() {
     const response = await instance.get('/articles/dummy-6_nousername/');
-    console.log(response.data);
     this.setState({
       articles: response.data,
     });
@@ -17,7 +16,6 @@ class SingleArticle extends Component {
 
   renderArt = () => {
     const art = this.state.articles;
-    console.log(art);
     return (
       art ? (
         <div key={art.id}>

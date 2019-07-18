@@ -3,12 +3,12 @@ import handleMessages from '../utils/messages';
 
 import actionTypes from './types';
 
-const articleActions = (action, slug, data) => async (dispatch) => {
+const articleActions = (action, slug = '', data = {}) => async (dispatch) => {
   let response;
   switch (action) {
     case 'edit':
       try {
-        response = await instance.put(`/articles/${slug}`, data);
+        response = await instance.put(`/articles/${slug}/`, data);
         dispatch({
           type: actionTypes.EDIT_ARTICLE,
           payload: response.data,
@@ -20,9 +20,12 @@ const articleActions = (action, slug, data) => async (dispatch) => {
       break;
     case 'delete':
       try {
-        response = await instance.delete(`/articles/${slug}`, data);
+        handleMessages('loading', 'Deleting article...')
+        await instance.delete(`/articles/${slug}/`, data);
+        const userId = localStorage.getItem('user_id')
+        response = await instance.get(`/user_articles/${userId}/`);
         dispatch({
-          type: actionTypes.DELETE_ARTICLE,
+          type: actionTypes.FETCH_USER_ARTICLES,
           payload: response.data,
         });
         handleMessages('success', 'Article successfully deleted 😄');

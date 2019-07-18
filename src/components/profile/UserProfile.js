@@ -1,10 +1,12 @@
 import React from 'react';
-import { List, Avatar, Icon } from 'antd';
+import {
+  List, Avatar, Icon, Popconfirm,
+} from 'antd';
+
 import EditProfile from '../../containers/profile/EditProfile';
 import './profile.scss';
 
 const UserProfile = (props) => {
-  const propItems = props;
   const IconText = ({ type, text }) => (
     <span>
       <Icon type={type} style={{ marginRight: 8 }} />
@@ -12,7 +14,7 @@ const UserProfile = (props) => {
     </span>
   );
 
-  const profileRenderLogic = ({ profile }) => { // eslint-disable-line
+  const profileRenderLogic = ({ myProfile, userArticles, articleActions }) => { // eslint-disable-line
     return (
       <div>
         <div className="profile-header-component">
@@ -21,23 +23,23 @@ const UserProfile = (props) => {
               <div className="profile-header-info-header">
                 <div className="profile-header-info-username">
                   <strong>
-                    {profile.first_name ? profile.first_name : 'John'} {/*eslint-disable-line */}
+                    {myProfile.profile.first_name ? myProfile.profile.first_name : 'John'} {/*eslint-disable-line */}
 &nbsp;
-                    {profile.last_name ? profile.last_name : 'Doe'} {/*eslint-disable-line */}
+                    {myProfile.profile.last_name ? myProfile.profile.last_name : 'Doe'} {/*eslint-disable-line */}
                   </strong>
                   <br />
-                  <span>{profile.username}</span>
+                  <span>{myProfile.profile.username}</span>
                 </div>
-                <div className="profile-header-info-edit"><EditProfile {...propItems} /></div>
+                <div className="profile-header-info-edit"><EditProfile {...props} /></div>
               </div>
-              <div className="profile-header-info-bio">{profile.bio}</div>
+              <div className="profile-header-info-bio">{myProfile.profile.bio}</div>
               <br />
               <div className="profile-header-info-followers"> 7 followers &nbsp;&nbsp;&nbsp;  1 Following</div>
             </div>
           </div>
           <div className="profile-pic-holder">
             <img
-              src={`${profile.image}`}
+              src={`${myProfile.profile.image}`}
               onError={(e) => {
                 e.target.src = 'https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png';
               }}
@@ -51,16 +53,29 @@ const UserProfile = (props) => {
           <List
             itemLayout="vertical"
             size="large"
-            dataSource={propItems.userArticles}
+            dataSource={userArticles}
             renderItem={item => (
               <List.Item
                 key={item.title}
                 actions={[
                   <IconText type="star-o" text={item.rating} />,
-                  <IconText type="like-o" text={item.likes} />,
+                  <IconText type="heart" text={item.likes} />,
                   <IconText type="message" text={item.comments.length} />,
-                  <IconText type="edit" text="edit" />,
-                  <IconText type="delete" text="delete" />,
+                  <span onClick={() => articleActions('edit', item.slug)}>
+                    <Icon type="edit" />
+                    {' '}
+                     edit
+                  </span>,
+                  <Popconfirm
+                    title="Are you sure you want to delete this article?"
+                    onConfirm={() => articleActions('delete', item.slug)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Icon type="delete" />
+                    {' '}
+                     delete
+                  </Popconfirm>,
                 ]}
                 extra={(
                   <img
@@ -72,7 +87,7 @@ const UserProfile = (props) => {
 )}
               >
                 <List.Item.Meta
-                  avatar={<Avatar src={profile.image} />}
+                  avatar={<Avatar src={myProfile.profile.image} />}
                   title={<a href={item.href}>{item.title}</a>}
                   description={item.description}
                 />
@@ -85,7 +100,7 @@ const UserProfile = (props) => {
     );
   };
   const renderProfile = () => (
-    props.myProfile ? profileRenderLogic(props.myProfile) : null
+    props.myProfile ? profileRenderLogic(props) : null
   );
   return (
     <div data-test="user-profile-overview">

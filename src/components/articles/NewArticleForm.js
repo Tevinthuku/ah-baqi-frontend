@@ -10,23 +10,26 @@ import handleMessages from '../../utils/messages';
 
 const NewArticleForm = (props) => {
   const {
-    children, handleChange, size, handleSubmit, image, create, title, description, body, tagList, imageUrlArt, article,
+    children, handleChange, size, handleSubmit, create, title,
+    description, body, tagList, article,
   } = props;
 
+  let { image } = props;
+
   let imageUrl = '';
-  const handleUploadImages = (image) => {
-    image = image[0];
+  const handleUploadImages = (images) => {
+    image = images[0]; // eslint-disable-line
     const cloudinaryAPIKey = 896213827437316;
     const reader = new FileReader();
-    reader.onloadend = function () {
-      image = reader.result; // this is an ArrayBuffer
+    reader.onloadend = () => {
+      image = reader.result;
     };
     reader.readAsArrayBuffer(image);
     const formData = new FormData();
     formData.append('file', image);
     formData.append('api_key', cloudinaryAPIKey);
     formData.append('upload_preset', 'dvyip3rs');
-    formData.append('timestamp', (Date.now() / 1000) | 0);
+    formData.append('timestamp', (Date.now() / 1000));
     handleMessages('loading', 'your image is being uploaded... ');
     return axios.post(
       'https://api.cloudinary.com/v1_1/kwangonya/image/upload',
@@ -34,24 +37,23 @@ const NewArticleForm = (props) => {
       { headers: { 'X-Requested-With': 'XMLHttpRequest' } },
     )
       .then((response) => {
-        console.log(response.data.url);
         imageUrl = response.data.url;
         handleChange(imageUrl, 'image');
         handleMessages('success', 'Image was uploaded successfully 🤪');
       })
-      .catch(error => handleMessages('error', 'Failed to upload the image. 😔'));
+      .catch(() => handleMessages('error', 'Failed to upload the image. 😔'));
   };
-  let slug = '';
-  if (!create) {
-    slug = article.slug;
+
+  let { slug } = article;
+  if (create) {
+    slug = '';
   }
 
   return (
-    <div data="new-article-component">
+    <div data-test="new-article-form-component">
       <Row>
         <Col span={18} push={3}>
           <form
-            role="form"
             className="article-form"
             onSubmit={event => handleSubmit(event, create, slug)}
           >
@@ -95,7 +97,7 @@ const NewArticleForm = (props) => {
                             type="file-image"
                             style={{ fontSize: '20px' }}
                           />
-                                                Drag 'n' drop image here, or click to select image
+                          Drag &apos; n &apos; drop image here, or click to select image
                         </p>
                       )}
                     </div>

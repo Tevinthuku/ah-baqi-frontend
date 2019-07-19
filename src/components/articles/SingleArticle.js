@@ -7,12 +7,17 @@ import './landingPage/Singlearticle.scss';
 const SingleArticle = ({
   article, articleActions, history, editClick,
 }) => (
-  <div>
+  <div data-test="single-article">
     <Row>
       <Col span={18} offset={3}>
         <Row>
           <Col span={24} className="general-article-cols">
-            <AuthorHeadData editClick={editClick} articleData={article} articleActions={articleActions} history={history} />
+            <AuthorHeadData
+              articleData={article}
+              articleActions={articleActions}
+              history={history}
+              editClick={editClick}
+            />
           </Col>
           <Col span={24} className="general-article-cols">
             <p className="article-title">
@@ -26,19 +31,22 @@ const SingleArticle = ({
           </Col>
           {article.image ? (
             <Col span={24} className="general-article-cols article-image">
-              <img src={article.image} alt="Article Image" />
+              <img src={article.image} alt={article.slug} />
             </Col>
           ) : null}
 
           <Col span={24} className="general-article-cols">
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: article.body }} />
+            <div
+              className="article-body"
+              dangerouslySetInnerHTML={{ __html: article.body }} // eslint-disable-line
+            />
           </Col>
           <Col span={24} className="tag-cont">
-            {article.tagList.map(tag => (
+            {article.tagList ? article.tagList.map(tag => (
               <span key={tag} className="tag-disp">
                 {tag}
               </span>
-            ))}
+            )) : ['']}
           </Col>
           <Col span={24} className="general-article-cols">
             <Row>

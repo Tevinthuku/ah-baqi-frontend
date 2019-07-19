@@ -2,21 +2,22 @@ import React from 'react';
 
 import { Col, Row, Icon } from 'antd';
 
-const LeftLandingArticle = (props) => {
-  const { article, clicked } = props;
+const LeftLandingArticle = ({ article, clicked }) => {
   const newArticleDefImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436267/dummy%20ah/digitization-2076994_1280_q126vd.png';
-
+  const date = new Date(article.createdAt);
   return (
     <Col
       sm={20}
       md={12}
       className="landing-article-container article-hover"
       onClick={() => clicked(article.slug)}
+      data-test="left-landing-article"
     >
       <Col span={24} className="landing-article-image-container">
         <img
           src={article.image ? article.image : newArticleDefImage}
           className="landing-article-image"
+          alt="article-default"
         />
       </Col>
       <Col span={24}>
@@ -33,10 +34,15 @@ const LeftLandingArticle = (props) => {
               <Row>
                 <Col span={24}>
                   <span>
-Jul 17 .
+                    {date.toLocaleString('default', { month: 'long' })}
+                    {' '}
+                    {date.getDay()}
+                    {' '}
+                    .
+                    {' '}
                     {article.reading_time}
                     {' '}
-read
+                    read
                     {' '}
                   </span>
                   <span>

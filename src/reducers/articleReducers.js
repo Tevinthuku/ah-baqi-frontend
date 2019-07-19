@@ -30,13 +30,11 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.CREATE_ARTICLE:
-      console.log(action.payload);
       return {
         ...state,
         articleData: { ...action.payload },
       };
     case actionTypes.GET_ALL_ARTICLES:
-      console.log(action);
       return {
         ...state,
         articles: action.payload.results,

@@ -5,9 +5,14 @@ import { Row, Col, Icon } from 'antd';
 const SingleFeaturedArticle = (props) => {
   const { article, clicked } = props;
   const defaultImg = 'https://res.cloudinary.com/zonecc/image/upload/v1563479322/dummy%20ah/image-not-av_otvgko.png';
+  const date = new Date(article.createdAt);
 
   return (
-    <Row className="featured-article-container article-hover" onClick={() => clicked(article.slug)}>
+    <Row
+      className="featured-article-container article-hover"
+      onClick={() => clicked(article.slug)}
+      data-test="single-featured-article"
+    >
       <Col span={15} offset={3}>
         <Row>
           <Col span={24} className="featured-article-title">
@@ -28,7 +33,16 @@ const SingleFeaturedArticle = (props) => {
             <Row className="mid-article-read-date">
               <Col span={24}>
                 <span>
-                  Jul 17 .
+                  {date.toLocaleString('default', { month: 'long' })}
+                  {' '}
+                  {date.getDay()}
+                  {' '}
+                  .
+                  {' '}
+                  {article.reading_time}
+                  {' '}
+                  read
+                  {' '}
                   {article.reading_time}
                   {' '}
                   read
@@ -47,7 +61,7 @@ const SingleFeaturedArticle = (props) => {
       <Col span={6} className="featured-artical-img-cont">
         <img
           src={article.image ? article.image : defaultImg}
-          alt="Article Image"
+          alt="Article Featured"
           className="featured-image-article"
         />
       </Col>

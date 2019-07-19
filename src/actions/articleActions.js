@@ -9,7 +9,6 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
     case 'edit':
       try {
         response = await instance.put(`/articles/${slug}/`, data);
-        console.log(response);
         dispatch({
           type: actionTypes.EDIT_ARTICLE,
           payload: response.data,
@@ -17,7 +16,6 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
         handleMessages('success', 'Article successfully edited 😄');
         history.push(`/articles/${response.data.slug}`);
       } catch (error) {
-        console.error(error);
         handleMessages('error', 'Failed 😬');
       }
       break;
@@ -34,7 +32,6 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
         history.push('/profile');
         handleMessages('success', 'Article successfully deleted 😄');
       } catch (error) {
-        console.log(error);
         handleMessages('error', 'Failed 😬');
       }
       break;
@@ -61,8 +58,6 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
         response = await baseAxios.get(
           `/articles/${slug}/`,
         );
-
-        console.log(response.data);
 
         dispatch({
           type: actionTypes.GET_SINGLE_ARTICLES,

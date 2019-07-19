@@ -25,19 +25,19 @@ class PasswordReset extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { passwordLink } = this.state;
-    const { resetPasswordActions } = this.props;
+    const { resetPasswordActions } = this.props; // eslint-disable-line
     resetPasswordActions(passwordLink);
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { from } = this.props;
     return (
       <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
         <div>
-          <h1>Let's find your account</h1>
+          <h1>Let&apos;s find your account</h1>
         </div>
         <Form.Item className="reset-label" label="Email">
-          {getFieldDecorator('email', {
+          {from.getFieldDecorator('email', {
             rules: [{
               type: 'email', message: 'Please enter a valid email',
             },

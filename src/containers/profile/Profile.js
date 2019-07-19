@@ -24,6 +24,7 @@ export class UnconnectedProfile extends Component {
             userArticles={userArticles}
             articleActions={articleActions}
             history={history}
+            onEditClick={this.handleEditClick}
           />
         </div>
       </div>

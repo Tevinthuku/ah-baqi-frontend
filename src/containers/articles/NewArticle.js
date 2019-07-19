@@ -12,6 +12,19 @@ class CreateNewArticle extends Component {
       image: '',
     }
 
+    componentDidMount() {
+      const { create, articleData } = this.props;
+      if (!create) {
+        this.setState({
+          title: articleData.title,
+          description: articleData.description,
+          body: articleData.body,
+          tagList: articleData.tagList,
+          image: articleData.image,
+        });
+      }
+    }
+
     handleChange = (event, element = 'title') => {
       switch (element) {
         case 'editor':
@@ -45,6 +58,7 @@ class CreateNewArticle extends Component {
 
     handleSubmit = (event, create, slug = '') => {
       event.preventDefault();
+      const { articleActions, history } = this.props; //  eslint-disable-line
       const {
         title, description, body, tagList, image,
       } = { ...this.state };
@@ -60,45 +74,41 @@ class CreateNewArticle extends Component {
       }
 
       if (create) {
-        this.props.articleActions('create', '', this.props.history, data);
+        articleActions('create', '', history, data);
       } else {
-        this.props.articleActions('edit', slug, this.props.history, data);
-      }
-    }
-
-    componentDidMount() {
-      const { create, articleData } = this.props;
-      if (!create) {
-        this.setState({
-          title: articleData.title,
-          description: articleData.description,
-          body: articleData.body,
-          tagList: articleData.tagList,
-          image: articleData.image,
-        });
+        articleActions('edit', slug, history, data);
       }
     }
 
     render() {
+      let displayForm = '';
+      const {
+        image, description, body, tagList, title,
+      } = this.state;
+      const { create, articleData } = this.props;
+      if (localStorage.isLoggedIn) {
+        displayForm = (
+          <NewArticleForm
+            image={image}
+            handleChange={this.handleChange}
+            thisProp={this}
+            handleSubmit={this.handleSubmit}
+            create={create}
+            title={title}
+            article={articleData}
+            description={description}
+            body={body}
+            tagList={tagList}
+          />
+        );
+      } else {
+        window.location.href = '/';
+      }
+
+
       return (
         <div>
-          {localStorage.isLoggedIn
-            ? (
-              <NewArticleForm
-                image={this.state.image}
-                handleChange={this.handleChange}
-                thisProp={this}
-                handleSubmit={this.handleSubmit}
-                create={this.props.create}
-                title={this.state.title}
-                article={this.props.articleData}
-                description={this.state.description}
-                body={this.state.body}
-                tagList={this.state.tagList}
-                imageUrlArt={this.state.image}
-              />
-            )
-            : window.location.href = '/'}
+          {displayForm}
         </div>
       );
     }

@@ -6,7 +6,6 @@ import LeftLandindArticle from './landingPage/LeftLandindArticle';
 import MiddleLandingArticles from './landingPage/MiddleLandingArticles';
 
 const LandingArticles = (props) => {
-  console.log(props);
   const { leftArticle, middleArticles, handleClick } = props;
 
   return (
@@ -14,10 +13,12 @@ const LandingArticles = (props) => {
       <LeftLandindArticle
         article={leftArticle}
         clicked={handleClick}
+        data-test="left-landing-article"
       />
       <MiddleLandingArticles
         articles={middleArticles}
         clicked={handleClick}
+        data-test="middle-landing-article"
       />
     </Row>
   );

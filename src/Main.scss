@@ -3,7 +3,6 @@ $primary-black: #000;
 $font-stack: Helvetica,
 sans-serif;
 $brand-color: #262626;
-$light-grey: #66666611;
 
 body {
   font: $font-stack;
@@ -50,8 +49,4 @@ body,
 .article-hover {
   cursor: pointer;
   padding: 5px 0;
-}
-
-.article-hover:hover {
-  background-color: $light-grey;
 }

@@ -2,17 +2,21 @@ import React from 'react';
 
 import { Col, Row, Icon } from 'antd';
 
-const SingleMidLandingArticle = (props) => {
-  const { article, clicked } = props;
+const SingleMidLandingArticle = ({ article, clicked }) => {
   const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
-
+  const date = new Date(article.createdAt);
   return (
-    <Col span={24} className="mid-landing-article article-hover" onClick={() => clicked(article.slug)}>
+    <Col
+      span={24}
+      className="mid-landing-article article-hover"
+      onClick={() => clicked(article.slug)}
+      data-test="single-mid-landing-article"
+    >
       <Row>
         <Col span={7} className="landing-article-image-mid-cont">
           <img
             src={article.image ? article.image : defImage}
-            alt="Article Image"
+            alt="Article Middle"
             className="landing-article-image-mid"
           />
         </Col>
@@ -31,10 +35,15 @@ Mona Eltahawy in ZORA
               <Row className="mid-article-read-date">
                 <Col span={24}>
                   <span>
-Jul 17 .
+                    {date.toLocaleString('default', { month: 'long' })}
+                    {' '}
+                    {date.getDay()}
+                    {' '}
+                    .
+                    {' '}
                     {article.reading_time}
                     {' '}
-read
+                    read
                     {' '}
                   </span>
                   <span className="rating-icons-pos">

@@ -3,25 +3,30 @@ import { connect } from 'react-redux';
 
 import { Skeleton } from 'antd';
 import articleActions from '../../actions/articleActions';
-
 import SingleArticle from '../../components/articles/SingleArticle';
 
 class SingleArticleContainer extends Component {
     componentWillMount() {
         if (!this.props.articleData.id) {
-            console.log(this.props.history.location);
-            const slug = this.props.history.location.pathname.split('/')[2]
-            this.props.articleActions('get-one', slug)
-            console.log(slug);
+            const slug = this.props.history.location.pathname.split('/')[2];
+            this.props.articleActions('get-one', slug);
         }
     }
+    toggleLikeHandler = (slug) => {
+        console.log(this.props.history)
+        this.props.articleActions('like', slug, this.props.history, '')
+    }
     render() {
-        console.log(this.props.articleData)
-        const { articleData } = this.props;
+        const { articleData, articleActions, history } = this.props;
 
         let singleArticleData = <Skeleton active />;
         if (articleData.id) {
-            singleArticleData = <SingleArticle article={articleData} />
+            singleArticleData = <SingleArticle
+                article={articleData}
+                articleActions={articleActions}
+                history={history}
+                beenLiked={articleData}
+                liking={this.toggleLikeHandler} />;
         }
 
         return (
@@ -33,7 +38,8 @@ class SingleArticleContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    articleData: state.article.articleData
+    articleData: state.article.articleData,
+    beenLiked: state.article.beenLiked
 })
 
 export default connect(mapStateToProps, { articleActions })(SingleArticleContainer);

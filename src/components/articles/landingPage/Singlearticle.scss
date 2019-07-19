@@ -36,6 +36,7 @@ $green-col: #45d645;
 .article-image img {
     width: 100%;
     height: 95%;
+    object-fit: contain;
     border: none;
 }
 

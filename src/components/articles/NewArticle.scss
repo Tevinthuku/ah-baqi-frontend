@@ -3,6 +3,7 @@ $light-blue: #0e7fe133;
 $dark-grey: #666666;
 $button-blue: #0e7fe1;
 $plain-white: #ffffff;
+$grey-border: #b1b1b1 solid 1px;
 
 .article-form {
     width: 100%;
@@ -83,4 +84,19 @@ $plain-white: #ffffff;
 .input-group {
     display: flex;
     margin-bottom: 10px;
+}
+
+.single-article-icon {
+    margin-right: 5px;
+}
+
+// .footer-text-span {
+//     text-align: center;
+//     font-weight: bold;
+// }
+
+.article-footer {
+    border-top: $grey-border;
+    border-bottom: $grey-border;
+    padding: 1em 5em 0 5em;
 }

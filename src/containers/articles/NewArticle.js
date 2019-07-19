@@ -12,6 +12,19 @@ class CreateNewArticle extends Component {
       image: '',
     }
 
+    componentDidMount() {
+      const { create, articleData } = this.props;
+      if (!create) {
+        this.setState({
+          title: articleData.title,
+          description: articleData.description,
+          body: articleData.body,
+          tagList: articleData.tagList,
+          image: articleData.image,
+        });
+      }
+    }
+
     handleChange = (event, element = 'title') => {
       switch (element) {
         case 'editor':
@@ -43,8 +56,9 @@ class CreateNewArticle extends Component {
       }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = (event, create, slug = '') => {
       event.preventDefault();
+      const { articleActions, history } = this.props; //  eslint-disable-line
       const {
         title, description, body, tagList, image,
       } = { ...this.state };
@@ -58,31 +72,50 @@ class CreateNewArticle extends Component {
           title, description, body, tagList,
         };
       }
-      console.log(data);
-      this.props.articleActions('create', '', this.props.history, data);
+
+      if (create) {
+        articleActions('create', '', history, data);
+      } else {
+        articleActions('edit', slug, history, data);
+      }
     }
 
     render() {
-      const { isLoggedin } = this.props;
+      let displayForm = '';
+      const {
+        image, description, body, tagList, title,
+      } = this.state;
+      const { create, articleData } = this.props;
+      if (localStorage.isLoggedIn) {
+        displayForm = (
+          <NewArticleForm
+            image={image}
+            handleChange={this.handleChange}
+            thisProp={this}
+            handleSubmit={this.handleSubmit}
+            create={create}
+            title={title}
+            article={articleData}
+            description={description}
+            body={body}
+            tagList={tagList}
+          />
+        );
+      } else {
+        window.location.href = '/';
+      }
+
+
       return (
         <div>
-          {localStorage.isLoggedIn
-            ? (
-              <NewArticleForm
-                image={this.state.image}
-                handleChange={this.handleChange}
-                articleActions
-                handleSubmit={this.handleSubmit}
-              />
-            )
-            : window.location.href = '/'}
+          {displayForm}
         </div>
       );
     }
 }
 
 const mapStateToProps = state => ({
-  isLoggedin: state.login.isLoggedin,
+  articleData: state.article.articleData,
 });
 
 export default connect(mapStateToProps, { articleActions })(CreateNewArticle);

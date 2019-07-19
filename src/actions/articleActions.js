@@ -14,6 +14,7 @@ const articleActions = (action, slug = '', history = null, data = {}) => async (
           payload: response.data,
         });
         handleMessages('success', 'Article successfully edited 😄');
+        history.push(`/articles/${response.data.slug}`);
       } catch (error) {
         handleMessages('error', 'Failed 😬');
       }

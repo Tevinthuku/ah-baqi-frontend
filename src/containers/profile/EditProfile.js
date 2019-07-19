@@ -9,12 +9,12 @@ import { displayModalActions, hideModalActions } from '../../actions/modalAction
 
 export class UnconnectedEditProfile extends React.Component {
   showModal = () => {
-    const { displayModalActions } = this.props;
+    const { displayModalActions } = this.props; // eslint-disable-line
     displayModalActions();
   };
 
   handleCancel = () => {
-    const { hideModalActions } = this.props;
+    const { hideModalActions } = this.props; // eslint-disable-line
     hideModalActions();
   };
 

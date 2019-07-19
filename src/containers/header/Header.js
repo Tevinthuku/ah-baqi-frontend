@@ -19,19 +19,11 @@ import {
   firebaseAuthAction,
 } from '../../actions/socialAuthActions';
 
-export const UnconnectedHeader = ({
-  signupActions,
-  hideModalActions,
-  formSignupAction,
-  emailSignupAction,
-  authAction,
-  visible,
-  emailLoginAction,
-  formLoginAction,
-  socialAuthActions,
-  firebaseAuthAction,
-  loginActions, logoutActions,
-}) => {
+export const UnconnectedHeader = (props) => {
+  const {
+    signupActions, hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
+    authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
+    firebaseAuthAction, loginActions, logoutAction } = props; // eslint-disable-line
   const handleCancel = () => {
     hideModalActions();
   };
@@ -62,10 +54,6 @@ export const UnconnectedHeader = ({
 
   const showLoginFormHandler = () => {
     formLoginAction();
-  };
-
-  const loginUserHandler = (data) => {
-    loginActions(data);
   };
 
   const logOutUserHandler = () => {

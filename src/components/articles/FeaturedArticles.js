@@ -26,7 +26,6 @@ const FeaturedArticle = (props) => {
         <h3 className="featured-title">
           <span>Featured Articles</span>
         </h3>
-        <div className="shadow" />
         <div className="featured-wrapper">
           {articleData}
         </div>

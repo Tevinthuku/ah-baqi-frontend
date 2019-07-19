@@ -36,7 +36,6 @@ export default function (state = initialState, action) {
         created: true,
       };
     case actionTypes.GET_ALL_ARTICLES:
-      console.log(action)
       return {
         ...state,
         articles: action.payload.results,

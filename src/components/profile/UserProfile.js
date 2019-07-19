@@ -14,7 +14,9 @@ const UserProfile = (props) => {
     </span>
   );
 
-  const profileRenderLogic = ({ myProfile, userArticles, articleActions, history }) => { // eslint-disable-line
+  const profileRenderLogic = ({
+    myProfile, userArticles, articleActions, history,
+  }) => {
     const handleClick = (slug) => {
       const urlTo = `/articles/${slug}`;
       articleActions('get-one', slug);
@@ -67,11 +69,6 @@ const UserProfile = (props) => {
                 actions={[
                   <IconText type="heart" text={item.likes} />,
                   <IconText type="message" text={item.comments.length} />,
-                  <span onClick={() => articleActions('edit', item.slug)}>
-                    <Icon type="edit" />
-                    {' '}
-                     edit
-                  </span>,
                   <Popconfirm
                     title="Are you sure you want to delete this article?"
                     onConfirm={() => articleActions('delete', item.slug, history)}
@@ -89,13 +86,12 @@ const UserProfile = (props) => {
                     height={170}
                     alt="article"
                     src={item.image}
-                    // src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                   />
 )}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={myProfile.profile.image} />}
-                  title={<a onClick={() => handleClick(item.slug)}>{item.title}</a>}
+                  title={<t onClick={() => handleClick(item.slug)}>{item.title}</t>}
                   description={item.description}
                 />
                 {item.content}

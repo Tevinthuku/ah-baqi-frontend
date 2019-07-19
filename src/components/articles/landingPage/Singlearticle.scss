@@ -5,6 +5,7 @@
 $text-black: #000000;
 $light-shadow: #00000044;
 $green-col: #45d645;
+$light-grey: #66666611;
 
 .general-article-cols {
     margin-bottom: 10px;
@@ -88,4 +89,16 @@ $green-col: #45d645;
 .created-and-read {
     margin-top: 10px;
     font-size: 12px;
+}
+
+.tag-cont {
+    margin-bottom: 20px;
+}
+
+.tag-disp {
+    padding: 5px 10px;
+    background-color: $light-grey;
+    margin-right: 10px;
+    border-radius: 2px;
+    font-size: 13px;
 }

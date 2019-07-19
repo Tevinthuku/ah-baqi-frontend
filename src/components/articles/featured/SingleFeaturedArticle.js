@@ -4,13 +4,14 @@ import { Row, Col, Icon } from 'antd';
 
 const SingleFeaturedArticle = (props) => {
   const { article, clicked } = props;
-  const defaultImg = 'http://res.cloudinary.com/kwangonya/image/upload/v1563446441/ah-django/default_dlfzzg.jpg';
+  const defaultImg = 'https://res.cloudinary.com/zonecc/image/upload/v1563479322/dummy%20ah/image-not-av_otvgko.png';
+  const date = new Date(article.createdAt);
 
   return (
     <Row
-      data-test="single-featured-article"
-      className="featured-article-container"
+      className="featured-article-container article-hover"
       onClick={() => clicked(article.slug)}
+      data-test="single-featured-article"
     >
       <Col span={15} offset={3}>
         <Row>
@@ -20,18 +21,33 @@ const SingleFeaturedArticle = (props) => {
             </h3>
           </Col>
           <Col span={24} className="featured-article-desc">
-            {article.description.substr(1, 120)}
+            {article.description.substr(0, 100)}
           </Col>
           <Row>
             <Col
               span={24}
               className="mid-article-author"
             >
-Mona Eltahawy in ZORA
+              Mona Eltahawy in ZORA
             </Col>
             <Row className="mid-article-read-date">
               <Col span={24}>
-                <span>Jul 17 . 8 min read </span>
+                <span>
+                  {date.toLocaleString('default', { month: 'long' })}
+                  {' '}
+                  {date.getDay()}
+                  {' '}
+                  .
+                  {' '}
+                  {article.reading_time}
+                  {' '}
+                  read
+                  {' '}
+                  {article.reading_time}
+                  {' '}
+                  read
+                  {' '}
+                </span>
                 <span className="rating-icons-pos">
                   <Icon type="star" theme="filled" style={{ color: 'black', fontSize: '12px' }} />
                   <Icon type="star" theme="filled" style={{ color: 'black', fontSize: '12px' }} />
@@ -45,7 +61,7 @@ Mona Eltahawy in ZORA
       <Col span={6} className="featured-artical-img-cont">
         <img
           src={article.image ? article.image : defaultImg}
-          alt="Article Image"
+          alt="Article Featured"
           className="featured-image-article"
         />
       </Col>

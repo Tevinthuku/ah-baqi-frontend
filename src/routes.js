@@ -17,7 +17,16 @@ const Routes = () => (
         <Route exact path="/resetconfirm/:token" component={ConfrimReset} />
         <Route exact path="/passwordreset" component={PasswordReset} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/articles/new" exact component={CreateNewArticle} />
+        <Route
+          path="/articles/new"
+          exact
+          render={props => <CreateNewArticle {...props} create />}
+        />
+        <Route
+          path="/articles/update"
+          exact
+          render={props => <CreateNewArticle {...props} create={false} />}
+        />
         <Route path="/articles/:slug" exact component={SingleArticleContainer} />
       </Switch>
     </BrowserRouter>

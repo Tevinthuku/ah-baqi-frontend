@@ -16,6 +16,7 @@ body,
 
 .nav {
   background-color: $primary-white;
+  margin-block: 10px;
 }
 
 .logo {
@@ -44,4 +45,14 @@ body,
   background-color: $brand-color;
   opacity: .1;
   width: 100%;
+}
+
+.article-hover {
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.ant-statistic-content-value-int {
+  font-size: 18px;
+  font-weight: normal;
 }

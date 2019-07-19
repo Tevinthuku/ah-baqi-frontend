@@ -10,24 +10,23 @@ import FeaturedArticles from '../../components/articles/FeaturedArticles';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.articleActions('get-all');
+    const {articleActions} = this.props; // eslint-disable-line
+    articleActions('get-all');
   }
 
   handleClick = (slug) => {
-    this.props.articleData.id = 0;
+    const { articleActions, articleData, history } = this.props; // eslint-disable-line
+    articleData.id = 0;
     const urlTo = `/articles/${slug}`;
-    this.props.articleActions('get-one', slug);
-    this.props.history.push(urlTo);
+    articleActions('get-one', slug);
+    history.push(urlTo);
   }
 
   render() {
-    const {
-      articles, nextPage, previousPage, articleCount,
-    } = this.props;
+    const { articles } = this.props;
 
     let displayHomeData = <Skeleton active />;
     if (articles.length > 0) {
-      console.log(articles, nextPage, previousPage, articleCount);
       displayHomeData = (
         <div>
           <LandingArticles

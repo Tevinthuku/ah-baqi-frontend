@@ -4,11 +4,12 @@ import { Col, Row, Icon } from 'antd';
 
 const LeftLandingArticle = ({ article, clicked }) => {
   const newArticleDefImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436267/dummy%20ah/digitization-2076994_1280_q126vd.png';
-
+  const date = new Date(article.createdAt);
   return (
     <Col
-      span={12}
-      className="landing-article-container"
+      sm={20}
+      md={12}
+      className="landing-article-container article-hover"
       onClick={() => clicked(article.slug)}
       data-test="left-landing-article"
     >
@@ -16,6 +17,7 @@ const LeftLandingArticle = ({ article, clicked }) => {
         <img
           src={article.image ? article.image : newArticleDefImage}
           className="landing-article-image"
+          alt="article-default"
         />
       </Col>
       <Col span={24}>
@@ -24,7 +26,7 @@ const LeftLandingArticle = ({ article, clicked }) => {
             <h1 className="left-art-title">{article.title}</h1>
           </Col>
           <Col span={24} className="left-art-desc">
-            {article.description.substr(1, 100)}
+            {article.description.substr(0, 100)}
           </Col>
           <Col span={24}>
             <Row>
@@ -32,13 +34,16 @@ const LeftLandingArticle = ({ article, clicked }) => {
               <Row>
                 <Col span={24}>
                   <span>
-                    Jul 17 .
+                    {date.toLocaleString('default', { month: 'long' })}
                     {' '}
-                    { article.reading_time }
+                    {date.getDay()}
+                    {' '}
+                    .
+                    {' '}
+                    {article.reading_time}
                     {' '}
                     read
                     {' '}
-
                   </span>
                   <span>
                     <Icon type="star" theme="filled" style={{ color: 'black', fontSize: '12px' }} />

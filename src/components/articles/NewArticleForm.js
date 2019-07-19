@@ -6,46 +6,56 @@ import './NewArticle.scss';
 import CKEditor from 'ckeditor4-react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
+import handleMessages from '../../utils/messages';
 
 const NewArticleForm = (props) => {
   const {
-    children, handleChange, size, handleSubmit, image,
+    children, handleChange, size, handleSubmit, create, title,
+    description, body, tagList, article,
   } = props;
+
+  let { image } = props;
+
   let imageUrl = '';
-  const handleUploadImages = (image) => {
-    image = image[0];
+  const handleUploadImages = (images) => {
+    image = images[0]; // eslint-disable-line
     const cloudinaryAPIKey = 896213827437316;
     const reader = new FileReader();
-    reader.onloadend = function () {
-      image = reader.result; // this is an ArrayBuffer
+    reader.onloadend = () => {
+      image = reader.result;
     };
     reader.readAsArrayBuffer(image);
     const formData = new FormData();
     formData.append('file', image);
     formData.append('api_key', cloudinaryAPIKey);
     formData.append('upload_preset', 'dvyip3rs');
-    formData.append('timestamp', (Date.now() / 1000) | 0);
+    formData.append('timestamp', (Date.now() / 1000));
+    handleMessages('loading', 'your image is being uploaded... ');
     return axios.post(
       'https://api.cloudinary.com/v1_1/kwangonya/image/upload',
       formData,
       { headers: { 'X-Requested-With': 'XMLHttpRequest' } },
     )
       .then((response) => {
-        console.log(response.data.url);
         imageUrl = response.data.url;
         handleChange(imageUrl, 'image');
+        handleMessages('success', 'Image was uploaded successfully 🤪');
       })
-      .catch(error => console.error(error));
+      .catch(() => handleMessages('error', 'Failed to upload the image. 😔'));
   };
+
+  let { slug } = article;
+  if (create) {
+    slug = '';
+  }
 
   return (
     <div data-test="new-article-form-component">
       <Row>
         <Col span={18} push={3}>
           <form
-            role="form"
             className="article-form"
-            onSubmit={event => handleSubmit(event)}
+            onSubmit={event => handleSubmit(event, create, slug)}
           >
             <div className="form-group">
               <input
@@ -53,6 +63,7 @@ const NewArticleForm = (props) => {
                 className="article-create-input"
                 placeholder="Add A Title For Your Article"
                 onChange={event => handleChange(event, 'title')}
+                value={title}
               />
               <input
                 type="submit"
@@ -67,6 +78,7 @@ const NewArticleForm = (props) => {
                 placeholder="Add Some Description For Your Article"
                 rows="3"
                 onChange={event => handleChange(event, 'description')}
+                value={description}
               />
             </div>
 
@@ -79,7 +91,15 @@ const NewArticleForm = (props) => {
                   <section>
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      {image || <p>Drag 'n' drop some files here, or click to select files</p>}
+                      {image || (
+                        <p>
+                          <Icon
+                            type="file-image"
+                            style={{ fontSize: '20px' }}
+                          />
+                          Drag &apos; n &apos; drop image here, or click to select image
+                        </p>
+                      )}
                     </div>
                   </section>
                 )}
@@ -97,7 +117,7 @@ Image successfully uploaded
 
             <div className="form-group">
               <CKEditor
-                data="Add article data"
+                data={body}
                 type="classic"
                 className="article-editor"
                 onChange={event => handleChange(event, 'editor')}
@@ -109,7 +129,7 @@ Image successfully uploaded
                 mode="tags"
                 size={size}
                 placeholder="Add your tag(s) here"
-                defaultValue={['your tag']}
+                value={tagList}
                 style={{ width: '100%' }}
                 onChange={event => handleChange(event, 'tags')}
               >

@@ -6,12 +6,19 @@ import articleActions from '../../actions/articleActions';
 import SingleArticle from '../../components/articles/SingleArticle';
 
 class SingleArticleContainer extends Component {
-    componentWillMount() {
-        if (!this.props.articleData.id) {
-            const slug = this.props.history.location.pathname.split('/')[2];
-            this.props.articleActions('get-one', slug);
-        }
+componentWillMount() {
+    const { articleData, articleActions, history } = this.props; // eslint-disable-line
+    if (!articleData.id) {
+      const slug = history.location.pathname.split('/')[2];
+      articleActions('get-one', slug);
     }
+  }
+
+  handleEditClick = () => {
+    const { articleData, articleActions, history } = this.props; // eslint-disable-line
+    articleActions('get-one', articleData.slug);
+    history.push('/articles/update');
+  }
     toggleLikeHandler = (slug) => {
         console.log(this.props.history)
         this.props.articleActions('like', slug, this.props.history, '')

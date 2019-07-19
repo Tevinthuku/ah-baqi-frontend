@@ -12,7 +12,7 @@ const Navbar = ({ clickedLogin = null, clickedSignup = null, logOut = null }) =>
   <Layout className="nav">
     <Header className="nav">
       <Link to="/" className="logo">
-        Author&rsquo;s Haven
+        <span className="app-name-logo"> Author&rsquo;s Haven </span>
       </Link>
       {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (

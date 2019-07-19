@@ -25,17 +25,17 @@ const AuthModal = ({
     case 'login': (
       modalData = (
         <div style={{ textAlign: 'center' }}>
+          <EmailModalButton
+            action="Login"
+            clicked={showLoginForm}
+            data-test="email-button-test"
+          />
           <SocialAuthModalButtons
             action="Login"
             googleResponse={google}
             facebookResponse={facebook}
             twitterResponse={twitter}
             onFailure={onFailure}
-          />
-          <EmailModalButton
-            action="Login"
-            clicked={showLoginForm}
-            data-test="email-button-test"
           />
         </div>
       )
@@ -44,16 +44,16 @@ const AuthModal = ({
     case 'signup': (
       modalData = (
         <div style={{ textAlign: 'center' }}>
+          <EmailModalButton
+            action="Signup"
+            clicked={showSignupForm}
+          />
           <SocialAuthModalButtons
             googleResponse={google}
             facebookResponse={facebook}
             twitterResponse={twitter}
             onFailure={onFailure}
             action="Signup"
-          />
-          <EmailModalButton
-            action="Signup"
-            clicked={showSignupForm}
           />
         </div>
       )

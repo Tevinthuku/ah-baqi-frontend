@@ -21,24 +21,26 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      articles, nextPage, previousPage, articleCount,
-    } = this.props;
+    const { articles } = this.props;
 
-    let displayHomeData = <Skeleton active />;
+    let displayHomeData = <Skeleton active data-test="skeleton-loader" />;
     if (articles.length > 0) {
-      console.log(articles, nextPage, previousPage, articleCount);
       displayHomeData = (
         <div>
           <LandingArticles
             middleArticles={articles.slice(1, 4)}
             leftArticle={articles[0]}
             handleClick={this.handleClick}
+            data-test="landing-articles"
           />
           <div className="shadow" />
           <Row>
             <Col span={15}>
-              <FeaturedArticles handleClick={this.handleClick} articles={articles.slice(4)} />
+              <FeaturedArticles
+                handleClick={this.handleClick}
+                articles={articles.slice(4)}
+                data-test="featured-articles"
+              />
             </Col>
             <Col span={8} push={1}>
               Popular articles

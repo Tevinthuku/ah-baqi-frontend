@@ -8,6 +8,7 @@ describe('<SingleArticle /> component', () => {
     article: {
       title: 'test title',
       description: 'test description',
+      taglist: ['tag1', 'tag2'],
     },
   };
   const wrapper = shallow(<SingleArticle article={props.article} />);

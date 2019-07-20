@@ -41,7 +41,7 @@ const Article = ({
               dangerouslySetInnerHTML={{ __html: article.body }} // eslint-disable-line
             />
           </Col>
-          <Col span={24} className="tag-cont">
+          <Col span={24} className="tag-cont" data-test="article tags">
             {article.tagList && article.tagList.map(tag => (
               <span key={tag} className="tag-disp">
                 {tag}

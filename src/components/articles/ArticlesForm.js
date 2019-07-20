@@ -5,12 +5,11 @@ import {
 import './NewArticle.scss';
 import CKEditor from 'ckeditor4-react';
 import Dropzone from 'react-dropzone';
-import imageUploader from '../../utils/imageUploader';
 
 const ArticlesForm = (props) => {
   const {
     children, handleChange, size, handleSubmit, create, title,
-    description, body, tagList, article, image,
+    description, body, tagList, article, image, imageUpload,
   } = props;
 
   const imageUrl = '';
@@ -32,6 +31,7 @@ const ArticlesForm = (props) => {
                 placeholder="Add A Title For Your Article"
                 onChange={event => handleChange(event, 'title')}
                 value={title}
+                data-test="title-input"
               />
               <input
                 type="submit"
@@ -50,13 +50,16 @@ const ArticlesForm = (props) => {
               />
             </div>
 
-            <div className="input-group">
+            <div
+              className="input-group"
+              data-test="image drop"
+            >
               <Dropzone
-                onDrop={acceptedFile => imageUploader(acceptedFile, imageUrl, handleChange)}
+                onDrop={acceptedFile => imageUpload(acceptedFile, imageUrl, handleChange)}
                 accept="image/*"
               >
                 {({ getRootProps, getInputProps }) => (
-                  <section>
+                  <section data-test="dropzone section">
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       {image || (
@@ -89,6 +92,7 @@ const ArticlesForm = (props) => {
                 editorName="editor1"
                 type="classic"
                 onChange={event => handleChange(event, 'editor')}
+                data-test="text word editor"
               />
             </div>
 

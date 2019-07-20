@@ -1,29 +1,32 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { containerStore } from '../../../utils/testUtils';
+import { Skeleton } from 'antd';
 import ArticlePage from '../../articles/Article';
+// import ArticlesForm from '../../../components/articles/ArticlesForm';
+import { containerStore } from '../../../utils/testUtils';
 
-const articleData = {
-  id: 1,
-  slug: 'fake_slug_username',
-  title: 'Fake Title',
-  description: 'some description',
-  body: 'the body is a long description of the article',
-};
+const store = containerStore({});
+const component = shallow(<ArticlePage store={store} />).dive().dive();
 
-const initialSetup = (props) => {
-  const store = containerStore();
-  const wrapper = shallow(
-    <ArticlePage store={store} {...props} />,
-  ).dive().dive();
-  return wrapper;
-};
+describe('<ArticlePage /> rendering', () => {
+  test('should render successfully show skeleton on loading', () => {
+    expect(component.find(Skeleton)).toHaveLength(1);
+  });
 
-const unconnectedWrapper = initialSetup({});
+  test('should render successfully show skeleton on loading', () => {
+    const articleData = {
+      id: 1,
+      body: 'this is my body',
+      title: 'Page Title',
+      description: 'article description',
+      slug: 'page-title_username',
+    };
 
-describe('<ArticlePage /> component renders successfully', () => {
-  test('should test if ArtcleData id is zero at initial state', () => {
-    const initialArticleData = unconnectedWrapper.instance().props.articleData.id;
-    expect(initialArticleData).toBe(0);
+    const componentMounted = shallow(<ArticlePage
+      store={store}
+      articleData={articleData}
+    />)
+      .dive().dive();
+    expect(componentMounted.find(Skeleton)).toHaveLength(1);
   });
 });

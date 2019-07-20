@@ -2,6 +2,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers/index';
+import articleReducer from '../reducers/articleReducers';
 
 const mockStore = configureStore([thunk]);
 const initialState = {
@@ -12,10 +13,22 @@ const initialState = {
 const store = mockStore(initialState);
 
 const hasAttributes = (wrapper, attributeValue) => (wrapper.find(`[data-test="${attributeValue}"]`));
+const hasElement = (wrapper, element) => (wrapper.find(element));
 
 export const componentRenders = (wrapper, attributeValue) => {
   const component = hasAttributes(wrapper, attributeValue);
   expect(component.length).toBe(1);
+};
+
+export const propOnchangeTests = (wrapper, element, mockFn) => {
+  const elementf = hasElement(wrapper, element);
+  elementf.props().onChange();
+  expect(mockFn).toHaveBeenCalled();
+};
+
+export const reducerTests = (constant, result) => {
+  const newState = articleReducer(constant, { type: constant, payload: { ...result } });
+  expect(newState.articleData).toEqual(result);
 };
 
 export const containerStore = (initialStateFull) => {

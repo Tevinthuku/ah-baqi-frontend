@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArticlesForm from '../../components/articles/ArticlesForm';
 import { createArticle, editArticle } from '../../actions/articleActions';
+import imageUploader from '../../utils/imageUploader';
+
 
 class CreateUpdateArticle extends Component {
   state = {
@@ -88,18 +90,21 @@ class CreateUpdateArticle extends Component {
     const { create, articleData } = this.props;
     if (localStorage.isLoggedIn) {
       displayForm = (
-        <ArticlesForm
-          image={image}
-          handleChange={this.handleChange}
-          thisProp={this}
-          handleSubmit={this.handleSubmit}
-          create={create}
-          title={title}
-          article={articleData}
-          description={description}
-          body={body}
-          tagList={tagList}
-        />
+        <div>
+          <ArticlesForm
+            image={image}
+            handleChange={this.handleChange}
+            thisProp={this}
+            handleSubmit={this.handleSubmit}
+            create={create}
+            title={title}
+            article={articleData}
+            description={description}
+            body={body}
+            tagList={tagList}
+            imageUpload={imageUploader}
+          />
+        </div>
       );
     } else {
       window.location.href = '/';
@@ -107,7 +112,7 @@ class CreateUpdateArticle extends Component {
 
 
     return (
-      <div>
+      <div data-test="article form page">
         {displayForm}
       </div>
     );

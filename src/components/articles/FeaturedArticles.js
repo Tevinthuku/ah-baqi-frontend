@@ -1,17 +1,15 @@
 import React from 'react';
 import { Row } from 'antd';
 
-import SingleFeaturedArticle from './featured/SingleFeaturedArticle';
+import FeaturedArticle from './featured/FeaturedArticle';
 
 import './Featuredarticles.scss';
 
-const FeaturedArticle = (props) => {
-  const { articles, handleClick } = props;
-
+const FeaturedArticles = ({ articles, handleClick }) => {
   let articleData = '';
   if (articles) {
     articleData = articles.map(article => (
-      <SingleFeaturedArticle
+      <FeaturedArticle
         data-test="single-featured-article"
         clicked={handleClick}
         key={article.slug}
@@ -35,4 +33,4 @@ const FeaturedArticle = (props) => {
   );
 };
 
-export default FeaturedArticle;
+export default FeaturedArticles;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col, Statistic } from 'antd';
-import { IconText, toggleLike } from './ArticleFooter';
+import { IconText } from './ArticleFooter';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
-const SingleArticle = ({ editClick, article, articleActions, history, liking, beenLiked }) => (
+const Article = ({ editClick, article, history, deleteAction, liking, beenLiked, likes }) => (
   <div data-test="single-article">
     <Row>
       <Col span={18} offset={3}>
@@ -12,7 +12,7 @@ const SingleArticle = ({ editClick, article, articleActions, history, liking, be
           <Col span={24} className="general-article-cols">
             <AuthorHeadData
               articleData={article}
-              articleActions={articleActions}
+              onDelete={deleteAction}
               history={history}
               editClick={editClick}
             />
@@ -37,18 +37,18 @@ const SingleArticle = ({ editClick, article, articleActions, history, liking, be
             <div className="article-body" dangerouslySetInnerHTML={{ __html: article.body }} />
           </Col>
           <Col span={24} className="tag-cont">
-            {article.tagList ? article.tagList.map(tag => (
+            {article.tagList && article.tagList.map(tag => (
               <span key={tag} className="tag-disp">
                 {tag}
               </span>
-            )) : ['']}
+            ))}
           </Col>
           <Col span={24} className="general-article-cols">
             <Row className="article-footer">
               <Col className="article-liking" span={4}>
                 <Statistic
-                className="statistic-size"
-                  value={article.likes}
+                  className="statistic-size"
+                  value={likes}
                   prefix={<IconText
                     type="heart"
                     onClick={() => liking(article.slug)}
@@ -76,4 +76,4 @@ const SingleArticle = ({ editClick, article, articleActions, history, liking, be
   </div>
 );
 
-export default SingleArticle;
+export default Article;

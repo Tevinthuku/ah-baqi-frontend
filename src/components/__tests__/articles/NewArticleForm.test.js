@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import NewArticleForm from '../../articles/NewArticleForm';
+import NewArticleForm from '../../articles/ArticlesForm';
 
 const myArticle = {
   slug: '',
   body: '',
-}
+};
 
 describe('<NewArticleForm /> component', () => {
   const wrapper = shallow(<NewArticleForm article={myArticle} />);

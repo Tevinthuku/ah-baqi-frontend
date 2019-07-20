@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Col, Row, Icon } from 'antd';
 
-const SingleMidLandingArticle = ({ article, clicked }) => {
+const MidLandingArticle = ({ article, clicked }) => {
   const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
   const date = new Date(article.createdAt);
   return (
@@ -30,7 +30,7 @@ const SingleMidLandingArticle = ({ article, clicked }) => {
                 span={24}
                 className="mid-article-author"
               >
-Mona Eltahawy in ZORA
+                Mona Eltahawy in ZORA
               </Col>
               <Row className="mid-article-read-date">
                 <Col span={24}>
@@ -61,4 +61,4 @@ Mona Eltahawy in ZORA
   );
 };
 
-export default SingleMidLandingArticle;
+export default MidLandingArticle;

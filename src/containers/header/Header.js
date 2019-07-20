@@ -23,54 +23,24 @@ export const UnconnectedHeader = (props) => {
   const {
     signupActions, hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
     authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
-    firebaseAuthAction, loginActions, logoutAction } = props; // eslint-disable-line
-  const handleCancel = () => {
-    hideModalActions();
-  };
+    firebaseAuthAction, loginActions, logoutActions } = props; // eslint-disable-line
+
   const handleSignupSubmit = (event, formProp) => {
     event.preventDefault();
     formProp.validateFields((error, values) => {
       if (!error) {
-        signupActions(values, handleCancel);
+        signupActions(values, hideModalActions);
       }
     });
-  };
-
-  const signupUserHandler = (data) => {
-    signupActions(data);
-  };
-
-  const showSignupFormHandler = () => {
-    formSignupAction();
-  };
-
-  const signupModalsHandler = () => {
-    emailSignupAction();
-  };
-
-  const loginModalsHandler = () => {
-    emailLoginAction();
-  };
-
-  const showLoginFormHandler = () => {
-    formLoginAction();
-  };
-
-  const logOutUserHandler = () => {
-    logoutActions();
   };
 
   const handleLoginSubmit = (event, formProp) => {
     event.preventDefault();
     formProp.validateFields((error, values) => {
       if (!error) {
-        loginActions(values, handleCancel);
+        loginActions(values, hideModalActions);
       }
     });
-  };
-
-  const handleFirebaseTwitter = () => {
-    firebaseAuthAction(handleCancel);
   };
 
   const socialAuthResponse = (response, provider) => {
@@ -82,7 +52,7 @@ export const UnconnectedHeader = (props) => {
     if (provider === 'facebook') {
       authData.token_provider = 'facebook';
     }
-    socialAuthActions(authData, provider, handleCancel);
+    socialAuthActions(authData, provider, hideModalActions);
   };
 
   const onFailure = () => 'failed';
@@ -90,22 +60,20 @@ export const UnconnectedHeader = (props) => {
   return (
     <div data-test="header-section">
       <Navbar
-        clickedSignup={signupModalsHandler}
-        clickedLogin={loginModalsHandler}
-        logOut={logOutUserHandler}
+        clickedSignup={emailSignupAction}
+        clickedLogin={emailLoginAction}
+        logOut={logoutActions}
       />
       <AuthModal
         authAction={authAction}
         visible={visible}
-        onCancel={handleCancel}
-        showSignupForm={showSignupFormHandler}
-        signup={signupUserHandler}
+        onCancel={hideModalActions}
+        showSignupForm={formSignupAction}
         submitSignup={handleSignupSubmit}
-        showLoginForm={showLoginFormHandler}
-        login={loginModalsHandler}
+        showLoginForm={formLoginAction}
         google={socialAuthResponse}
         facebook={socialAuthResponse}
-        twitter={handleFirebaseTwitter}
+        twitter={firebaseAuthAction}
         onFailure={onFailure}
         submitLogin={handleLoginSubmit}
       />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SingleMidLandingArticle from '../../articles/landingPage/SingleMiddleLandingArticle';
+import SingleMidLandingArticle from '../../articles/landingPage/MiddleLandingArticle';
 
 describe('<SingleMidLandingArticle /> component', () => {
   const props = {

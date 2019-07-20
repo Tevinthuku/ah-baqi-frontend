@@ -6,7 +6,9 @@ const initialState = {
   articleCount: 0,
   articles: [],
   nextPage: null,
+  likes: localStorage.likes,
   previousPage: null,
+  actionCalled: false,
   articleData: {
     id: 0,
     title: '',
@@ -34,10 +36,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articleData: { ...action.payload },
+        actionCalled: true
       };
     case actionTypes.GET_ALL_ARTICLES:
       return {
         ...state,
+        actionCalled: true,
         articles: action.payload.results,
         nextPage: action.payload.next,
         previousPage: action.payload.previous,
@@ -47,21 +51,25 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articleData: { ...action.payload },
+        actionCalled: true,
       };
     case actionTypes.EDIT_ARTICLE:
       return {
         ...state,
         articleData: { ...action.payload },
+        actionCalled: true,
       };
     case actionTypes.DELETE_ARTICLE:
       return {
         ...state,
         articleData: { ...action.payload },
+        actionCalled: true,
       };
     case actionTypes.TOGGLE_LIKE:
       return {
         ...state,
         beenLiked: action.payload,
+        actionCalled: true,
       }
     default:
       return state;

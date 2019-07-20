@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SingleFeaturedArticle from '../../articles/featured/SingleFeaturedArticle';
+import SingleFeaturedArticle from '../../articles/featured/FeaturedArticle';
 
 describe('<SingleFeaturedArticle /> component', () => {
   const props = {

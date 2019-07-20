@@ -1,5 +1,6 @@
 $primary-white: #fff;
 $primary-black: #000;
+$light-blue: #00bfff;
 $font-stack: Helvetica,
 sans-serif;
 $brand-color: #262626;
@@ -47,9 +48,21 @@ body,
   width: 100%;
 }
 
-.article-hover {
+.article-hover,
+button.article-hover-title {
   cursor: pointer;
   padding: 5px 0;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+button.article-hover-title {
+  padding: 0;
+}
+
+.article-hover-title:hover {
+  color: $light-blue;
 }
 
 .ant-statistic-content-value-int {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Icon } from 'antd';
 
-export const IconText = ({ type, beenLiked, onClick }) => {
-  if (beenLiked.likes) {
+export const IconText = ({ type, onClick }) => {
+  console.log(localStorage.beenLiked)
+  if (localStorage.beenLiked) {
     return <p data-test='icon-text'>
       <Icon type={type}
         className="single-article-icon"

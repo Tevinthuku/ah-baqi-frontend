@@ -19,7 +19,7 @@ class Home extends Component {
     const { articles, getAllArticles } = this.props; // eslint-disable-line
     getAllArticles();
 
-    let displayHomeData = <Skeleton active />;
+    let displayHomeData = <Skeleton active data-test="skeleton-loader" />;
     if (articles.length > 0) {
       displayHomeData = (
         <div>
@@ -27,11 +27,16 @@ class Home extends Component {
             middleArticles={articles.slice(1, 4)}
             leftArticle={articles[0]}
             handleClick={this.handleClick}
+            data-test="landing-articles"
           />
           <div className="shadow" />
           <Row>
             <Col span={15}>
-              <FeaturedArticles handleClick={this.handleClick} articles={articles.slice(4)} />
+              <FeaturedArticles
+                handleClick={this.handleClick}
+                articles={articles.slice(4)}
+                data-test="featured-articles"
+              />
             </Col>
             <Col span={8} push={1}>
               Popular articles

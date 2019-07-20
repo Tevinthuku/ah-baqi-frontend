@@ -55,16 +55,18 @@ const UserProfile = (props) => {
             />
           </div>
         </div>
-        <div className="profile-content-component">
+        <div className="profile-content-component" data-test="user-articles">
           <h2>Your posts</h2>
           <br />
           <List
             itemLayout="vertical"
             size="large"
             dataSource={userArticles}
+            data-test="articles-list"
             renderItem={item => (
               <List.Item
                 key={item.title}
+                data-test="article-list-item"
                 actions={[
                   <IconText type="heart" text={item.likes} />,
                   <IconText type="message" text={item.comments.length} />,

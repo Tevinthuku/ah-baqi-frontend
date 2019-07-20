@@ -15,11 +15,12 @@ const UserProfile = (props) => {
   );
 
   const profileRenderLogic = ({
-    myProfile, userArticles, articleActions, history,
+    myProfile, userArticles, getAnArticle, deleteArticle, history,
   }) => {
-    const handleClick = (slug) => {
+    const handleClick = (e, slug) => {
+      e.preventDefault();
       const urlTo = `/articles/${slug}`;
-      articleActions('get-one', slug);
+      getAnArticle(slug);
       history.push(urlTo);
     };
     return (
@@ -31,7 +32,7 @@ const UserProfile = (props) => {
                 <div className="profile-header-info-username">
                   <strong>
                     {myProfile.profile.first_name ? myProfile.profile.first_name : 'John'} {/*eslint-disable-line */}
-&nbsp;
+                    &nbsp;
                     {myProfile.profile.last_name ? myProfile.profile.last_name : 'Doe'} {/*eslint-disable-line */}
                   </strong>
                   <br />
@@ -69,13 +70,13 @@ const UserProfile = (props) => {
                   <IconText type="message" text={item.comments.length} />,
                   <Popconfirm
                     title="Are you sure you want to delete this article?"
-                    onConfirm={() => articleActions('delete', item.slug, history)}
+                    onConfirm={() => deleteArticle(item.slug, history)}
                     okText="Yes"
                     cancelText="No"
                   >
                     <Icon type="delete" />
                     {' '}
-                     delete
+                    delete
                   </Popconfirm>,
                 ]}
                 extra={(
@@ -85,11 +86,11 @@ const UserProfile = (props) => {
                     alt="article"
                     src={item.image}
                   />
-)}
+                )}
               >
                 <List.Item.Meta
                   avatar={<Avatar src={myProfile.profile.image} />}
-                  title={<t onClick={() => handleClick(item.slug)}>{item.title}</t>}
+                  title={<button type="button" className="article-hover-title" onClick={e => handleClick(e, item.slug)}>{item.title}</button>}
                   description={item.description}
                 />
                 {item.content}

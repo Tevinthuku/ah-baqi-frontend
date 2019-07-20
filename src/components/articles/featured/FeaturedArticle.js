@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Row, Col, Icon } from 'antd';
 
-const SingleFeaturedArticle = (props) => {
-  const { article, clicked } = props;
+const FeaturedArticle = ({ article, clicked }) => {
   const defaultImg = 'https://res.cloudinary.com/zonecc/image/upload/v1563479322/dummy%20ah/image-not-av_otvgko.png';
   const date = new Date(article.createdAt);
 
@@ -69,4 +68,4 @@ const SingleFeaturedArticle = (props) => {
   );
 };
 
-export default SingleFeaturedArticle;
+export default FeaturedArticle;

@@ -4,7 +4,7 @@ import {
 } from 'antd';
 
 const AuthorHeadData = ({
-  articleActions, articleData, history, editClick,
+  onDelete, articleData, history, editClick,
 }) => {
   const date = new Date(articleData.createdAt);
   return (
@@ -47,14 +47,14 @@ const AuthorHeadData = ({
                 {' '}
                 <Popconfirm
                   title="Are you sure you want to delete this article?"
-                  onConfirm={() => articleActions('delete', articleData.slug, history)}
+                  onConfirm={() => onDelete(articleData.slug, history)}
                   okText="Yes"
                   cancelText="No"
                 >
                   <Button type="danger" ghost>Delete</Button>
                 </Popconfirm>
               </span>
-            ) : null }
+            ) : null}
         </Col>
       </Row>
     </div>

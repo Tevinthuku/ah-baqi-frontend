@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Col, Row } from 'antd';
-import SingleMidLandingArticle from './SingleMiddleLandingArticle';
+import MidLandingArticle from './MiddleLandingArticle';
 
-const MiddleLandingArticle = ({ articles, clicked }) => (
+const MiddleLandingArticles = ({ articles, clicked }) => (
   <Col sm={20} md={9} className="landing-article-container">
     <Row data-test="mid-landing-article">
       {articles.map(article => (
-        <SingleMidLandingArticle
+        <MidLandingArticle
           key={article.slug}
           article={article}
           clicked={clicked}
@@ -17,4 +17,4 @@ const MiddleLandingArticle = ({ articles, clicked }) => (
   </Col>
 );
 
-export default MiddleLandingArticle;
+export default MiddleLandingArticles;

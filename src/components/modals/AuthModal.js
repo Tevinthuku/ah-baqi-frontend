@@ -36,6 +36,7 @@ const AuthModal = ({
             facebookResponse={facebook}
             twitterResponse={twitter}
             onFailure={onFailure}
+            cancel={onCancel}
           />
         </div>
       )
@@ -54,6 +55,7 @@ const AuthModal = ({
             twitterResponse={twitter}
             onFailure={onFailure}
             action="Signup"
+            cancel={onCancel}
           />
         </div>
       )

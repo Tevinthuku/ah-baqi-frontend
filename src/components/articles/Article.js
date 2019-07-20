@@ -4,8 +4,8 @@ import { Row, Col } from 'antd';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
-const SingleArticle = ({
-  article, articleActions, history, editClick,
+const Article = ({
+  article, deleteAction, history, editClick,
 }) => (
   <div data-test="single-article">
     <Row>
@@ -14,7 +14,7 @@ const SingleArticle = ({
           <Col span={24} className="general-article-cols">
             <AuthorHeadData
               articleData={article}
-              articleActions={articleActions}
+              onDelete={deleteAction}
               history={history}
               editClick={editClick}
             />
@@ -42,11 +42,11 @@ const SingleArticle = ({
             />
           </Col>
           <Col span={24} className="tag-cont">
-            {article.tagList ? article.tagList.map(tag => (
+            {article.tagList && article.tagList.map(tag => (
               <span key={tag} className="tag-disp">
                 {tag}
               </span>
-            )) : ['']}
+            ))}
           </Col>
           <Col span={24} className="general-article-cols">
             <Row>
@@ -72,4 +72,4 @@ const SingleArticle = ({
   </div>
 );
 
-export default SingleArticle;
+export default Article;

@@ -1,48 +1,66 @@
 import React, { Component } from 'react';
-import { instance } from '../../utils/axios';
-import Comments from '../comments/Comments';
+import { connect } from 'react-redux';
+
+import { Row, Col, Skeleton } from 'antd';
+import articleActions from '../../actions/articleActions';
+
+
+import LandingArticles from '../../components/articles/LandingArticles';
+import FeaturedArticles from '../../components/articles/FeaturedArticles';
 
 class Home extends Component {
-  state = {
-    articles: null,
+  componentDidMount() {
+    this.props.articleActions('get-all');
   }
 
-  componentWillMount() {
-    instance.get('/articles/what-is-love-baby-dont-heard-me_Willies/')
-      .then((response) => {
-        this.setState({
-          articles: response.data,
-        });
-      });
-  }
-
-  renderArt = () => {
-    const art = this.state.articles;
-    return (
-      art
-        ? (
-          <div>
-I
-            <h1>{art.title}</h1>
-            <p>{art.body}</p>
-            <Comments
-              comments={art.comments}
-              slug={art.slug}
-            />
-          </div>
-        ) : null
-    );
+  handleClick = (slug) => {
+    this.props.articleData.id = 0;
+    const urlTo = `/articles/${slug}`;
+    this.props.articleActions('get-one', slug);
+    this.props.history.push(urlTo);
   }
 
   render() {
+    const {
+      articles, nextPage, previousPage, articleCount,
+    } = this.props;
+
+    let displayHomeData = <Skeleton active />;
+    if (articles.length > 0) {
+      displayHomeData = (
+        <div>
+          <LandingArticles
+            middleArticles={articles.slice(1, 4)}
+            leftArticle={articles[0]}
+            handleClick={this.handleClick}
+          />
+          <div className="shadow" />
+          <Row>
+            <Col span={15}>
+              <FeaturedArticles handleClick={this.handleClick} articles={articles.slice(4)} />
+            </Col>
+            <Col span={8} push={1}>
+              Popular articles
+            </Col>
+          </Row>
+        </div>
+      );
+    }
     return (
-      <div>
-        <hr />
-        Welcome to the home page
-        {this.renderArt()}
+      <div className="container-body">
+        {displayHomeData}
       </div>
+
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  articles: state.article.articles,
+  articleData: state.article.articleData,
+  nextPage: state.article.nextPage,
+  previousPage: state.article.articles,
+  articleCount: state.article.articleCount,
+});
+
+export default connect(mapStateToProps, { articleActions })(Home);

@@ -29,13 +29,12 @@ class EditForm extends React.Component {
     const {
       slug, commentId, replyId, editNestedCommentItem,
     } = this.props;
-
     editNestedCommentItem(slug, commentId, replyId, value);
   }
 
   editNormalComment = (value) => {
-    const { slug, id } = this.props;
-    this.props.editCommentItem(slug, id, value);
+    const { slug, id, editCommentItem } = this.props;
+    editCommentItem(slug, id, value);
   }
 
   render() {
@@ -43,7 +42,7 @@ class EditForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline" onSubmit={this.handleSubmit} data-test="edit-container">
-        <Form.Item data-test="textarea-container">
+        <Form.Item data-test="textarea-container" className="textarea-container">
           {getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={4} />)}
         </Form.Item>
         <Form.Item data-test="submit-button-container">
@@ -69,8 +68,6 @@ const mapStateToProps = state => ({
 });
 
 export const UnconnectedEditUserCommentForm = Form.create({ name: 'edit_form' })(EditForm);
-
-
 export default connect(mapStateToProps, {
   editCommentItem,
   editNestedCommentItem,

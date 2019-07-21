@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
@@ -24,22 +24,28 @@ describe('<CoomentContainer />', () => {
     const wrapper = setup();
     expect(wrapper.find("[data-test='comments-container']")).toHaveLength(1);
   });
-  test('renders without error', () => {
-    const wrapper = setup();
-    const { addComment } = wrapper.instance().props;
-    const { deleteComment } = wrapper.instance().props;
-    expect(addComment).toBeInstanceOf(Function);
-    expect(deleteComment).toBeInstanceOf(Function);
-  });
-  test('`getUserProfile` runs on Profile mount', () => {
-    const handleSubmitMock = jest.fn();
+  test('renders correctly', () => {
+    const deleteCommentMock = jest.fn();
+    const likeCommentMock = jest.fn();
+    const dislikeCommentMock = jest.fn();
 
     const props = {
       comments: [],
+      slug: 'my comment',
+      deleteComment: deleteCommentMock,
+      likeComment: likeCommentMock,
+      dislikeComment: dislikeCommentMock,
     };
-    const wrapper = shallow(<UnconnectedCoomentContainer {...props} />);
+    const wrapper = shallow(<UnconnectedCoomentContainer />);
+    const handleSubmitMock = jest.fn();
     wrapper.instance().handleSubmit = handleSubmitMock;
     handleSubmitMock();
     expect(handleSubmitMock).toHaveBeenCalled();
+    const commentWrapper = wrapper.find("[data-test='comments-container-content']").children();
+    expect(commentWrapper).toHaveLength(0);
+    const wrapperItem = mount(shallow(<UnconnectedCoomentContainer {...props} />).get(0));
+    const comtEditor = wrapperItem.find("[data-test='comment-item-editor']");
+    expect(comtEditor).toHaveLength(1);
+    comtEditor.simulate('submit');
   });
 });

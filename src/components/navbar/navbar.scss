@@ -1,4 +1,4 @@
-$blue: blue;
+$blue: #0e7fe1;
 
 .navbar-profile-pic {
   color: $blue;
@@ -8,4 +8,12 @@ $blue: blue;
     height: 42px;
     border-radius: 50%;
   }
+}
+
+.icon-blue {
+  color: $blue;
+}
+
+.nav-text {
+  margin-left: -6px;
 }

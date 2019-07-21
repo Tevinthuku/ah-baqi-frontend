@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from '../../../reducers/index';
-import SecondaryComment from '../../comments/commentNest/SecondaryComment';
+import SecondaryComment, { UnconnectedSecondaryComment } from '../../comments/commentNest/SecondaryComment';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);
@@ -35,5 +35,15 @@ describe('<SecondaryComment />', () => {
     expect(wrapper.instance().state.value).toBe('');
     expect(wrapper.instance().props.addNestedComment).toBeInstanceOf(Function);
     expect(wrapper.instance().props.deleteNestedCommentItem).toBeInstanceOf(Function);
+  });
+  test('submits comment', () => {
+    const wrapper = shallow(<UnconnectedSecondaryComment />);
+    const handleSubmitMock = jest.fn();
+    wrapper.instance().handleSubmit = handleSubmitMock;
+    handleSubmitMock();
+    expect(handleSubmitMock).toHaveBeenCalled();
+
+    const commentWrapper = wrapper.find("[data-test='comments-container-content']").children();
+    expect(commentWrapper).toHaveLength(0);
   });
 });

@@ -32,14 +32,18 @@ describe('redux properties', () => {
   });
   test('`getUserProfile` runs on Profile mount', () => {
     const getUserProfileMock = jest.fn();
+    const getUserArticlesMock = jest.fn();
 
     const props = {
       getUserProfile: getUserProfileMock,
+      getUserArticles: getUserArticlesMock,
     };
     const wrapper = shallow(<UnconnectedProfile {...props} />);
     wrapper.instance().componentDidMount();
     const getProfile = getUserProfileMock.mock.calls.length;
+    const getArticles = getUserArticlesMock.mock.calls.length;
 
     expect(getProfile).toBe(1);
+    expect(getArticles).toBe(1);
   });
 });

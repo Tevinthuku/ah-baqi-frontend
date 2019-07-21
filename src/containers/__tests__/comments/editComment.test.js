@@ -29,6 +29,5 @@ describe('<EditUserCommentForm />', () => {
     expect(wrapper.find("[data-test='textarea-container']")).toHaveLength(1);
     const button = wrapper.find("[data-test='submit-button']");
     expect(button.length).toBe(1);
-    button.simulate('click');
   });
 });

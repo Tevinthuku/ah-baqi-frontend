@@ -5,18 +5,17 @@ import { user, displayComments, editComment } from '../helpers/helpers';
 import EditUserCommentForm from '../EditCommentContainer';
 import SecondaryComment from './SecondaryComment';
 
-export let commentItems;
+const Content = (props) => {
+  const {
+    comments,
+    slug,
+    deleteComment,
+    likeComment,
+    dislikeComment,
+  } = props;
 
-
-export const getItems = (
-  comments,
-  slug,
-  deleteComment,
-  likeComment,
-  dislikeComment,
-) => {
-  commentItems = comments.map(item => (
-    <div key={item.id}>
+  const commentItems = comments.map(item => (
+    <div key={item.id} className="comment-item-container">
       <p className="likes-message hide">
         <strong>
           Log in to like or dislike
@@ -27,22 +26,23 @@ export const getItems = (
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-        &nbsp;&nbsp;
+        {' '}
         {item.author}
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {' '}
+        {' '}
         {new Date(Date.parse(item.created_at)).toUTCString()}
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        {item.author == user
+        {' '}
+        {item.author === user
           ? (
-            <span>
-&nbsp;&nbsp;
+            <span className="utility-buttons">
+              {' '}
               <Icon
                 type="edit"
                 onClick={() => editComment(
                   `edit-field-${item.id}`,
                 )}
               />
-&nbsp;&nbsp;
+              {' '}
               <Icon
                 className="delete-icon"
                 type="delete"
@@ -52,7 +52,8 @@ export const getItems = (
           )
           : null
         }
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {' '}
+        {' '}
         <Icon
           className="comment-rating-likes"
           type="like"
@@ -65,10 +66,11 @@ export const getItems = (
           onClick={() => dislikeComment(slug, item.id)}
         />
         {item.dislikes}
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {' '}
+        {' '}
         <Icon
           className={`dropdown-icon-${item.id}`}
-          type="down"
+          type="message"
           onClick={() => displayComments(
             `nested-comment-${item.id}`,
             `close-up-${item.id}`,
@@ -85,7 +87,8 @@ export const getItems = (
           )}
         />
 
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {' '}
+        {' '}
       </p>
       <div>
         {item.body}
@@ -101,7 +104,7 @@ export const getItems = (
         </div>
 
       </div>
-      <div className={`nested-comment-${item.id} hide`}>
+      <div className={`nested-comment-${item.id} hide nested`}>
         <SecondaryComment
           replies={item.replies}
           id={item.id}
@@ -111,4 +114,11 @@ export const getItems = (
 
     </div>
   ));
+  return (
+    <div data-test="comment-item">
+      {commentItems}
+    </div>
+  );
 };
+
+export default Content;

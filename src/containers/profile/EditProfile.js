@@ -4,7 +4,7 @@ import { Button, Icon } from 'antd';
 import { bindActionCreators } from 'redux';
 import EditProfileForm from '../../components/profile/forms/EditProfileForm';
 
-import { editUserProfile } from '../../actions/profile';
+import { editUserProfile } from '../../actions/profileActions';
 import { displayModalActions, hideModalActions } from '../../actions/modalActions';
 
 export class UnconnectedEditProfile extends React.Component {
@@ -22,7 +22,7 @@ export class UnconnectedEditProfile extends React.Component {
     const { form } = this.formRef.props;
     form.validateFields((err, values) => {
       if (err) return;
-      const { editUserProfile } = this.props; // eslint-disable-line 
+      const { editUserProfile } = this.props; // eslint-disable-line
       const username = localStorage.getItem('username');
       editUserProfile(username, values);
       form.resetFields();

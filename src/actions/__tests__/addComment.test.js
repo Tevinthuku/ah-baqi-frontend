@@ -28,7 +28,6 @@ describe('comment actions', () => {
     instance.post.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(addComment('article', comment));
     expect(instance.post).toHaveBeenCalledWith('/articles/article/comments', comment);
   });
@@ -36,7 +35,6 @@ describe('comment actions', () => {
     instance.post.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(addNestedComment('article', nestComment, comment));
     expect(instance.post).toHaveBeenCalledWith(`/articles/article/comments/${nestComment}/reply`, comment);
   });
@@ -44,7 +42,6 @@ describe('comment actions', () => {
     instance.delete.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(deleteComment('id', comment));
     expect(instance.delete).toHaveBeenCalledWith(`/articles/${comment}/comments/id`);
   });
@@ -52,7 +49,6 @@ describe('comment actions', () => {
     instance.put.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(editCommentItem('id', slug, comment));
     expect(instance.put).toHaveBeenCalledWith(`/articles/id/comments/${slug}`, comment);
   });
@@ -60,7 +56,6 @@ describe('comment actions', () => {
     instance.put.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(editNestedCommentItem(slug, 'commentId', 'replyId', comment));
     expect(instance.put).toHaveBeenCalledWith(`/articles/${slug}/comments/commentId/reply/replyId`, comment);
   });
@@ -68,7 +63,6 @@ describe('comment actions', () => {
     instance.put.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(deleteNestedCommentItem(slug, 'commentId', 'replyId'));
     expect(instance.delete).toHaveBeenCalledWith(`/articles/${slug}/comments/commentId/reply/replyId`);
   });
@@ -76,7 +70,6 @@ describe('comment actions', () => {
     instance.post.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(dislikeComment(slug, 'commentId'));
     expect(instance.post).toHaveBeenCalledWith(`/articles/${slug}/comments/commentId/dislike`);
   });
@@ -84,34 +77,7 @@ describe('comment actions', () => {
     instance.post.mockImplementation(() => Promise.resolve({
       data: { comment },
     }));
-
     await store.dispatch(likeComment(slug, 'commentId'));
     expect(instance.post).toHaveBeenCalledWith(`/articles/${slug}/comments/commentId/like`);
-  });
-  test('addComment should fail', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    instance.post.mockImplementation(() => Promise.reject({}));
-    // await store.dispatch(addComment("article", comment))
-    await store.dispatch(addComment('article', comment));
-  });
-  test('addComment should fail', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    instance.post.mockImplementation(() => Promise.reject({}));
-    await store.dispatch(addComment('article', comment));
-  });
-  test('addNestedComment should fail', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    instance.post.mockImplementation(() => Promise.reject({}));
-    await store.dispatch(addNestedComment('article', nestComment, comment));
-  });
-  test('deleteComment should fail', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    instance.post.mockImplementation(() => Promise.reject({}));
-    await store.dispatch(deleteComment('id', comment));
-  });
-  test('deleteComment should fail', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    instance.post.mockImplementation(() => Promise.reject({}));
-    await store.dispatch(deleteComment('id', slug, comment));
   });
 });

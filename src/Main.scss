@@ -2,10 +2,16 @@ $primary-white: #fff;
 $primary-black: #000;
 $font-stack: Helvetica,
 sans-serif;
-$brand-color:  #262626;
+$brand-color: #262626;
 
 body {
   font: $font-stack;
+}
+
+body,
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .nav {
@@ -16,6 +22,7 @@ body {
   color: $primary-black;
   font-size: 17px;
 }
+
 .reset-form {
   align-content: center;
   align-items: center;
@@ -26,3 +33,15 @@ body {
 }
 
 
+
+.container-body {
+  width: 90%;
+  margin: auto;
+}
+
+.shadow {
+  height: 2px;
+  background-color: $brand-color;
+  opacity: .1;
+  width: 100%;
+}

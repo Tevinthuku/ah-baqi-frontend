@@ -1,25 +1,39 @@
 import React from 'react';
-import { Comment } from 'antd';
+import { Comment, Icon } from 'antd';
 import { connect } from 'react-redux';
+import Content from './commentNest/Content';
 
-import { Editor } from './helpers/helpers';
+import { Editor, closeEditor } from './helpers/helpers';
 import {
   addComment,
   deleteComment,
   likeComment,
   dislikeComment,
 } from '../../actions/comments';
-import { getItems, commentItems } from './commentNest/CommentItems';
 import './comments.scss';
 
 
 export class UnconnectedCoomentContainer extends React.Component {
   state = {
+    submitting: false,
     value: '',
   };
 
   handleSubmit = () => {
     const { value } = this.state;
+    if (!value) {
+      return;
+    }
+    this.setState({
+      submitting: true,
+    });
+
+    setTimeout(() => {
+      this.setState({
+        submitting: false,
+        value: '',
+      });
+    }, 1000);
     const commentValue = {
       comment: {
         body: value,
@@ -35,39 +49,22 @@ export class UnconnectedCoomentContainer extends React.Component {
     });
   };
 
-
   addContent = () => {
-    const {
-      comments,
-      slug,
-      props,
-      deleteComment,
-      likeComment,
-      dislikeComment,
-    } = this.props;
-
-    getItems(
-      comments,
-      slug,
-      deleteComment,
-      likeComment,
-      dislikeComment,
-    );
-    const { value } = this.state;
+    const { value, submitting } = this.state;
 
     return (
       <div>
-        <p className="comment-message hide">
-          <strong>
-            Login to post comment
-          </strong>
-        </p>
-        <Editor
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-          value={value}
-        />
-        {commentItems}
+        <div className="text-editor-tab hide">
+          <Editor
+            data-test="comment-item-editor"
+            className="text-editor"
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+            submitting={submitting}
+            value={value}
+          />
+        </div>
+        <Content {...this.props} />
       </div>
     );
   }
@@ -76,6 +73,14 @@ export class UnconnectedCoomentContainer extends React.Component {
     return (
       <div data-test="comments-container">
         <Comment
+          data-test="comments-container-content"
+          avatar={(
+            <Icon
+              type="message"
+              className="msg-icon"
+              onClick={() => closeEditor('text-editor-tab')}
+            />
+)}
           content={this.addContent()}
         />
       </div>

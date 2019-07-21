@@ -18,9 +18,9 @@ export const CommentList = ({ comments }) => (
 export const Editor = ({
   onChange, onSubmit, submitting, value,
 }) => (
-  <div>
+  <div className="text-editor-item">
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} />
+      <TextArea rows={3} onChange={onChange} value={value} />
     </Form.Item>
     <Form.Item>
       <Button className="add-comment" htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">

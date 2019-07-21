@@ -9,7 +9,7 @@
   font-size: 10px;
   height: 30px;
   padding: initial;
-  width: 89px;
+  width: 150px;
 }
 .comment-rating {
   font-size: 30px;
@@ -41,4 +41,29 @@
 
 .comment-message,.nested-comment-message, .likes-message {
   color: red;
+}
+
+.utility-buttons {
+  margin-left: 5%;
+}
+
+.nested {
+  margin-left: 6%;
+}
+.text-editor-item {
+  max-width: 73%;
+  margin: 0 0 0 7%;
+}
+
+.comment-item-container, .nested-comment-item {
+  // margin-bottom: 3%;
+  padding: 3%;
+}
+
+.nested-comment-item:hover {
+  background: rgb(236, 234, 234);
+}
+
+.msg-icon {
+  font-size: 30px;
 }

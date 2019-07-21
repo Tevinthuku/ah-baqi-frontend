@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Skeleton } from 'antd';
 import { getAnArticle, deleteArticle } from '../../actions/articleActions';
-
 import Article from '../../components/articles/Article';
 
 class ArticlePage extends Component {

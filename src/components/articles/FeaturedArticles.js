@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row } from 'antd';
-
 import FeaturedArticle from './featured/FeaturedArticle';
-
 import './Featuredarticles.scss';
 
 const FeaturedArticles = ({ articles, handleClick }) => {

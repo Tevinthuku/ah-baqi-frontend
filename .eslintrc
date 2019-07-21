@@ -41,6 +41,8 @@
           "to"
         ]
       }
-    ]
+    ],
+    "function-paren-newline": ["error", "never"],
+    "no-shadow": ["error", { "hoist": "never" }]
   }
 }

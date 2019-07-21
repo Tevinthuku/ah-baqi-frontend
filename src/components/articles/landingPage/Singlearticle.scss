@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:700|Montserrat:300|Roboto&display=swap');
 
 $text-black: #000000;
-$light-shadow: #00000044;
+$light-shadow: #e5eaed;
 $green-col: #45d645;
-$light-grey: #66666611;
+$light-grey: #f1f8fe;
 
 .general-article-cols {
     margin-bottom: 10px;
@@ -51,7 +51,7 @@ $light-grey: #66666611;
 .author-name {
     font-size: 13px;
     color: $text-black;
-    font-weight: 450;
+    font-weight: 400;
 }
 
 .article-body {

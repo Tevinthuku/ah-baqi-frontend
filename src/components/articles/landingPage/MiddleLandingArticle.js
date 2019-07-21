@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Col, Row, Icon } from 'antd';
 
 const MidLandingArticle = ({ article, clicked }) => {

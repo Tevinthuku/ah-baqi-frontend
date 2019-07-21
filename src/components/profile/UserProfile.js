@@ -32,7 +32,7 @@ const UserProfile = (props) => {
                 <div className="profile-header-info-username">
                   <strong>
                     {myProfile.profile.first_name ? myProfile.profile.first_name : 'John'} {/*eslint-disable-line */}
-                    &nbsp;
+                    {' '}
                     {myProfile.profile.last_name ? myProfile.profile.last_name : 'Doe'} {/*eslint-disable-line */}
                   </strong>
                   <br />
@@ -104,7 +104,7 @@ const UserProfile = (props) => {
     );
   };
   const renderProfile = () => (
-    props.myProfile ? profileRenderLogic(props) : null
+    props.myProfile && profileRenderLogic(props)
   );
   return (
     <div data-test="user-profile-overview">

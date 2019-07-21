@@ -2,9 +2,9 @@ import React from 'react';
 import {
   Row, Col, Select, Icon,
 } from 'antd';
-import './NewArticle.scss';
 import CKEditor from 'ckeditor4-react';
 import Dropzone from 'react-dropzone';
+import './NewArticle.scss';
 
 const ArticlesForm = (props) => {
   const {

@@ -2,7 +2,9 @@ import actionTypes from '../../actions/types';
 import articleReducer from '../articleReducers';
 
 describe('articleReducer', () => {
-  let initialState, articleData, payload;
+  let initialState;
+  let articleData;
+  let payload;
   beforeAll(() => {
     initialState = {
       loading: false,

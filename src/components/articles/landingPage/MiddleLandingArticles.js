@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Col, Row } from 'antd';
 import MidLandingArticle from './MiddleLandingArticle';
 

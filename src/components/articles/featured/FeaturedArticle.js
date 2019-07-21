@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Row, Col, Icon } from 'antd';
 
 const FeaturedArticle = ({ article, clicked }) => {

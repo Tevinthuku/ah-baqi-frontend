@@ -36,23 +36,23 @@ body,
 
 
 .container-body {
-  width: 90%;
   margin: auto;
+  width: 90%;
 }
 
 .shadow {
-  height: 2px;
   background-color: $brand-color;
-  opacity: .1;
+  height: 2px;
+  opacity: 0.1;
   width: 100%;
 }
 
 .article-hover,
 button.article-hover-title {
+  background: none;
+  border: 0;
   cursor: pointer;
   padding: 5px 0;
-  background: none;
-  border: none;
   text-align: left;
 }
 

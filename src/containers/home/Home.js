@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Row, Col, Skeleton } from 'antd';
+import { connect } from 'react-redux';
 
 import { getAllArticles, getAnArticle } from '../../actions/articleActions';
 import LandingArticles from '../../components/articles/LandingArticles';

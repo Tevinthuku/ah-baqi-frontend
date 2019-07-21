@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import UserProfile from '../../profile/UserProfile';
 
 describe('<UserProfile />', () => {
@@ -20,7 +20,10 @@ describe('<UserProfile />', () => {
         },
       ],
     };
-    wrapper = shallow(<UserProfile myProfile={props.myProfile} userArticles={props.userArticles} />);
+    wrapper = shallow(<UserProfile
+      myProfile={props.myProfile}
+      userArticles={props.userArticles}
+    />);
   });
   test('renders without error', () => {
     expect(wrapper.find("[data-test='user-profile-overview']")).toHaveLength(1);
@@ -32,7 +35,7 @@ describe('<UserProfile />', () => {
     expect(wrapper.find("[data-test='articles-list']")).toHaveLength(1);
   });
   test('renders user articles list items', () => {
-    const articleWrapper = wrapper.find("[data-test='articles-list']").dive().dive()
+    const articleWrapper = wrapper.find("[data-test='articles-list']").dive().dive();
     expect(articleWrapper.find("[data-test='article-list-item']")).toHaveLength(1);
   });
 });

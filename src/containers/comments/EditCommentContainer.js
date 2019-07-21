@@ -41,13 +41,19 @@ class EditForm extends React.Component {
     const { btnClass, editorClass, body } = this.props;
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit} data-test="edit-container">
-        <Form.Item data-test="textarea-container" className="textarea-container">
-          {getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={4} />)}
+      <Form 
+        layout="inline"
+        onSubmit={this.handleSubmit}
+        data-test="edit-container"
+        className="edit-form-item">
+        <Form.Item data-test="textarea-container">
+          {getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={3} />)}
         </Form.Item>
         <Form.Item data-test="submit-button-container">
-          <Button type="link" htmlType="submit">
-            <Icon type="check-circle" />
+          <Button type="link" htmlType="submit"
+            onClick={() => closeEditor(editorClass)}
+          >
+            <Icon type="check-circle" className="edit-buttons" />
           </Button>
           <Button
             data-test="submit-button"
@@ -55,7 +61,7 @@ class EditForm extends React.Component {
             type="link"
             onClick={() => closeEditor(editorClass)}
           >
-            <Icon type="close-circle" />
+            <Icon type="close-circle" className="edit-buttons" />
           </Button>
         </Form.Item>
       </Form>

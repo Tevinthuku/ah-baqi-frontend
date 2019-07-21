@@ -33,7 +33,7 @@ const Content = (props) => {
         {new Date(Date.parse(item.created_at)).toUTCString()}
         {' '}
         {item.author === user
-          ? (
+          && (
             <span className="utility-buttons">
               {' '}
               <Icon
@@ -50,7 +50,6 @@ const Content = (props) => {
               />
             </span>
           )
-          : null
         }
         {' '}
         {' '}
@@ -66,8 +65,7 @@ const Content = (props) => {
           onClick={() => dislikeComment(slug, item.id)}
         />
         {item.dislikes}
-        {' '}
-        {' '}
+        {' '} {' '} {' '}
         <Icon
           className={`dropdown-icon-${item.id}`}
           type="message"

@@ -46,6 +46,5 @@ export const editComment = (editButton) => {
 
 export const loginRequest = (message, item) => {
   message                                       // eslint-disable-line
-    ? document.querySelector(`.${item}`).classList.toggle('hide')
-    : null;
+    && document.querySelector(`.${item}`).classList.toggle('hide');
 };

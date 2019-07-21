@@ -26,9 +26,8 @@ const SecondaryContent = (props) => {
         {new Date(Date.parse(item.created_at)).toUTCString()}
         {' '}
         {item.author === user
-          ? (
+          && (
             <span>
-              {' '}
               <Icon
                 type="edit"
                 onClick={() => editComment(
@@ -43,7 +42,6 @@ const SecondaryContent = (props) => {
               />
             </span>
           )
-          : null
         }
       </p>
       {item.body}

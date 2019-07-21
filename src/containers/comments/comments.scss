@@ -44,7 +44,7 @@
 }
 
 .utility-buttons {
-  margin-left: 5%;
+  margin-left: 2%;
 }
 
 .nested {
@@ -60,10 +60,16 @@
   padding: 3%;
 }
 
-.nested-comment-item:hover {
-  background: rgb(236, 234, 234);
-}
-
 .msg-icon {
   font-size: 30px;
+}
+
+#edit_form_body {
+  width: 900px;
+  margin-top: 10px;
+}
+
+.edit-buttons {
+  color: black;
+  font-size: 20px;
 }

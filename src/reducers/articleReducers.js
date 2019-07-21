@@ -47,16 +47,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articleData: { ...action.payload },
+        getNew: true,
       };
     case actionTypes.EDIT_ARTICLE:
       return {
         ...state,
         articleData: { ...action.payload },
-      };
-    case actionTypes.DELETE_ARTICLE:
-      return {
-        ...state,
-        articleData: { ...action.payload },
+        edited: true,
       };
     default:
       return state;

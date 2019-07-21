@@ -5,8 +5,8 @@ import Header from './containers/header/Header';
 import Profile from './containers/profile/Profile';
 import PasswordReset from './containers/resetpassword/resetPassword';
 import ConfrimReset from './containers/resetpassword/resetConfirm';
-import CreateNewArticle from './containers/articles/NewArticle';
-import SingleArticleContainer from './containers/articles/SingleArticle';
+import CreateUpdateArticle from './containers/articles/NewArticle';
+import ArticlePage from './containers/articles/Article';
 
 const Routes = () => (
   <div>
@@ -20,14 +20,14 @@ const Routes = () => (
         <Route
           path="/articles/new"
           exact
-          render={props => <CreateNewArticle {...props} create />}
+          render={props => <CreateUpdateArticle {...props} create />}
         />
         <Route
           path="/articles/update"
           exact
-          render={props => <CreateNewArticle {...props} create={false} />}
+          render={props => <CreateUpdateArticle {...props} create={false} />}
         />
-        <Route path="/articles/:slug" exact component={SingleArticleContainer} />
+        <Route path="/articles/:slug" exact component={ArticlePage} />
       </Switch>
     </BrowserRouter>
   </div>

@@ -8,7 +8,7 @@ import './navbar.scss';
 const { Header } = Layout;
 const { Item } = Menu;
 
-const Navbar = ({ clickedLogin = null, clickedSignup = null, logOut = null }) => (
+const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
   <Layout className="nav">
     <Header className="nav">
       <Link to="/" className="logo">

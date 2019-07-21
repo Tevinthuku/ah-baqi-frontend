@@ -1,94 +1,97 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NewArticleForm from '../../components/articles/NewArticleForm';
-import articleActions from '../../actions/articleActions';
+import ArticlesForm from '../../components/articles/ArticlesForm';
+import { createArticle, editArticle } from '../../actions/articleActions';
+import imageUploader from '../../utils/imageUploader';
 
-class CreateNewArticle extends Component {
-    state = {
-      title: '',
-      description: '',
-      body: '',
-      tagList: [],
-      image: '',
+
+class CreateUpdateArticle extends Component {
+  state = {
+    title: '',
+    description: '',
+    body: '',
+    tagList: [],
+    image: '',
+  }
+
+  componentDidMount() {
+    const { create, articleData } = this.props;
+    if (!create) {
+      this.setState({
+        title: articleData.title,
+        description: articleData.description,
+        body: articleData.body,
+        tagList: articleData.tagList,
+        image: articleData.image,
+      });
     }
+  }
 
-    componentDidMount() {
-      const { create, articleData } = this.props;
-      if (!create) {
+  handleChange = (event, element = 'title') => {
+    switch (element) {
+      case 'editor':
         this.setState({
-          title: articleData.title,
-          description: articleData.description,
-          body: articleData.body,
-          tagList: articleData.tagList,
-          image: articleData.image,
+          body: event.editor.getData(),
         });
-      }
+        break;
+      case 'tags':
+        this.setState({
+          tagList: event,
+        });
+        break;
+      case 'image':
+        this.setState({
+          image: event,
+        });
+        break;
+
+      case 'description':
+        this.setState({
+          description: event.target.value,
+        });
+        break;
+      default:
+        this.setState({
+          title: event.target.value,
+        });
+        break;
     }
+  }
 
-    handleChange = (event, element = 'title') => {
-      switch (element) {
-        case 'editor':
-          this.setState({
-            body: event.editor.getData(),
-          });
-          break;
-        case 'tags':
-          this.setState({
-            tagList: event,
-          });
-          break;
-        case 'image':
-          this.setState({
-            image: event,
-          });
-          break;
-
-        case 'description':
-          this.setState({
-            description: event.target.value,
-          });
-          break;
-        default:
-          this.setState({
-            title: event.target.value,
-          });
-          break;
-      }
-    }
-
-    handleSubmit = (event, create, slug = '') => {
-      event.preventDefault();
-      const { articleActions, history } = this.props; //  eslint-disable-line
-      const {
+  handleSubmit = (event, create, slug = '') => {
+    event.preventDefault();
+    const { createArticle, editArticle, history } = this.props; //  eslint-disable-line
+    const {
+      title, description, body, tagList, image,
+    } = { ...this.state };
+    let data = {};
+    if (image) {
+      data = {
         title, description, body, tagList, image,
-      } = { ...this.state };
-      let data = {};
-      if (image) {
-        data = {
-          title, description, body, tagList, image,
-        };
-      } else {
-        data = {
-          title, description, body, tagList,
-        };
-      }
-
-      if (create) {
-        articleActions('create', '', history, data);
-      } else {
-        articleActions('edit', slug, history, data);
-      }
+      };
+    } else {
+      data = {
+        title, description, body, tagList,
+      };
     }
 
-    render() {
-      let displayForm = '';
-      const {
-        image, description, body, tagList, title,
-      } = this.state;
-      const { create, articleData } = this.props;
-      if (localStorage.isLoggedIn) {
-        displayForm = (
-          <NewArticleForm
+    if (create) {
+      createArticle(data, history);
+    } else {
+      editArticle(slug, data, history);
+    }
+  }
+
+  render() {
+    let displayForm = '';
+    const {
+      image, description, body, tagList, title,
+    } = this.state;
+    const { create, articleData } = this.props;
+    if (localStorage.isLoggedIn) {
+      displayForm = (
+        <div>
+          <ArticlesForm
             image={image}
             handleChange={this.handleChange}
             thisProp={this}
@@ -99,23 +102,25 @@ class CreateNewArticle extends Component {
             description={description}
             body={body}
             tagList={tagList}
+            imageUpload={imageUploader}
           />
-        );
-      } else {
-        window.location.href = '/';
-      }
-
-
-      return (
-        <div>
-          {displayForm}
         </div>
       );
+    } else {
+      window.location.href = '/';
     }
+
+
+    return (
+      <div data-test="article form page">
+        {displayForm}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
   articleData: state.article.articleData,
 });
 
-export default connect(mapStateToProps, { articleActions })(CreateNewArticle);
+export default connect(mapStateToProps, { createArticle, editArticle })(CreateUpdateArticle);

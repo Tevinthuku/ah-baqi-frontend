@@ -5,49 +5,16 @@ import {
 import './NewArticle.scss';
 import CKEditor from 'ckeditor4-react';
 import Dropzone from 'react-dropzone';
-import axios from 'axios';
-import handleMessages from '../../utils/messages';
 
-const NewArticleForm = (props) => {
+const ArticlesForm = (props) => {
   const {
     children, handleChange, size, handleSubmit, create, title,
-    description, body, tagList, article,
+    description, body, tagList, article, image, imageUpload,
   } = props;
 
-  let { image } = props;
+  const imageUrl = '';
 
-  let imageUrl = '';
-  const handleUploadImages = (images) => {
-    image = images[0]; // eslint-disable-line
-    const cloudinaryAPIKey = 896213827437316;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      image = reader.result;
-    };
-    reader.readAsArrayBuffer(image);
-    const formData = new FormData();
-    formData.append('file', image);
-    formData.append('api_key', cloudinaryAPIKey);
-    formData.append('upload_preset', 'dvyip3rs');
-    formData.append('timestamp', (Date.now() / 1000));
-    handleMessages('loading', 'your image is being uploaded... ');
-    return axios.post(
-      'https://api.cloudinary.com/v1_1/kwangonya/image/upload',
-      formData,
-      { headers: { 'X-Requested-With': 'XMLHttpRequest' } },
-    )
-      .then((response) => {
-        imageUrl = response.data.url;
-        handleChange(imageUrl, 'image');
-        handleMessages('success', 'Image was uploaded successfully 🤪');
-      })
-      .catch(() => handleMessages('error', 'Failed to upload the image. 😔'));
-  };
-
-  let { slug } = article;
-  if (create) {
-    slug = '';
-  }
+  const slug = !create && article.slug;
 
   return (
     <div data-test="new-article-form-component">
@@ -64,6 +31,7 @@ const NewArticleForm = (props) => {
                 placeholder="Add A Title For Your Article"
                 onChange={event => handleChange(event, 'title')}
                 value={title}
+                data-test="title-input"
               />
               <input
                 type="submit"
@@ -82,13 +50,16 @@ const NewArticleForm = (props) => {
               />
             </div>
 
-            <div className="input-group">
+            <div
+              className="input-group"
+              data-test="image drop"
+            >
               <Dropzone
-                onDrop={acceptedFile => handleUploadImages(acceptedFile)}
+                onDrop={acceptedFile => imageUpload(acceptedFile, imageUrl, handleChange)}
                 accept="image/*"
               >
                 {({ getRootProps, getInputProps }) => (
-                  <section>
+                  <section data-test="dropzone section">
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       {image || (
@@ -109,7 +80,7 @@ const NewArticleForm = (props) => {
                   <span style={{ color: 'green' }}>
                     <Icon type="check-circle" />
                     {' '}
-Image successfully uploaded
+                    Image successfully uploaded
                   </span>
                 ) : 'No image Selected Yet'}
               </div>
@@ -118,9 +89,10 @@ Image successfully uploaded
             <div className="form-group">
               <CKEditor
                 data={body}
+                editorName="editor1"
                 type="classic"
-                className="article-editor"
                 onChange={event => handleChange(event, 'editor')}
+                data-test="text word editor"
               />
             </div>
 
@@ -143,4 +115,4 @@ Image successfully uploaded
   );
 };
 
-export default NewArticleForm;
+export default ArticlesForm;

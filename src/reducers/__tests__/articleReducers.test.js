@@ -2,7 +2,7 @@ import actionTypes from '../../actions/types';
 import articleReducer from '../articleReducers';
 
 describe('articleReducer', () => {
-  let initialState;
+  let initialState, articleData, payload;
   beforeAll(() => {
     initialState = {
       loading: false,
@@ -30,6 +30,17 @@ describe('articleReducer', () => {
         likes: 0,
       },
     };
+    articleData = {
+      id: 1,
+      body: 'this is my body',
+      title: 'Page Title',
+      description: 'article description',
+      slug: 'page-title_username',
+    };
+
+    payload = {
+      results: [articleData],
+    };
   });
   test('articleReducer returns initialState by default', () => {
     const newState = articleReducer(initialState, { type: 'default' });
@@ -46,5 +57,9 @@ describe('articleReducer', () => {
   test('EDIT_ARTICLE action returns edited:true', () => {
     const newState = articleReducer(initialState, { type: actionTypes.EDIT_ARTICLE });
     expect(newState.edited).toBe(true);
+  });
+  test('GET_ALL_ARTICLES action returns created:true', () => {
+    const newState = articleReducer('GET_ALL_ARTICLES', { type: 'GET_ALL_ARTICLES', payload });
+    expect(newState.articles).toEqual([articleData]);
   });
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../../components/profile/UserProfile';
 import './profile.scss';
-import articleActions from '../../actions/articleActions';
+import { deleteArticle, getAnArticle } from '../../actions/articleActions';
 import { getUserProfile, getUserArticles } from '../../actions/profileActions';
 
 export class UnconnectedProfile extends Component {
@@ -15,14 +15,15 @@ export class UnconnectedProfile extends Component {
   }
 
   render() {
-    const { profile, userArticles, articleActions, history } = this.props;  // eslint-disable-line
+    const { profile, userArticles, deleteArticle, history } = this.props;  // eslint-disable-line
     return (
       <div className="profile-container">
         <div className="profile-container-wrapper">
           <UserProfile
             myProfile={profile}
             userArticles={userArticles}
-            articleActions={articleActions}
+            deleteArticle={deleteArticle}
+            getAnArticle={getAnArticle}
             history={history}
             onEditClick={this.handleEditClick}
           />
@@ -38,5 +39,5 @@ const mapStateToProps = ({ userProfile }) => ({
 });
 
 export default connect(mapStateToProps, {
-  getUserProfile, getUserArticles, articleActions,
+  getUserProfile, getUserArticles, deleteArticle, getAnArticle,
 })(UnconnectedProfile);

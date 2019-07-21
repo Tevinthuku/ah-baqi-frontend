@@ -7,7 +7,7 @@ import Home from './containers/home/Home';
 import Profile from './containers/profile/Profile';
 import PasswordReset from './containers/resetpassword/resetPassword';
 import ConfrimReset from './containers/resetpassword/resetConfirm';
-import SingleArticleContainer from './containers/articles/SingleArticle';
+import ArticlePage from './containers/articles/Article';
 
 describe('Routes', () => {
   const wrapper = shallow(<Routes />);
@@ -22,6 +22,6 @@ describe('Routes', () => {
     expect(pathMap['/resetconfirm/:token']).toBe(ConfrimReset);
     expect(pathMap['/passwordreset']).toBe(PasswordReset);
     expect(pathMap['/profile']).toBe(Profile);
-    expect(pathMap['/articles/:slug']).toBe(SingleArticleContainer);
+    expect(pathMap['/articles/:slug']).toBe(ArticlePage);
   });
 });

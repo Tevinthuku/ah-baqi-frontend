@@ -42,7 +42,6 @@
         ]
       }
     ],
-    "function-paren-newline": ["error", "never"],
-    "no-shadow": ["error", { "hoist": "never" }]
+    "function-paren-newline": ["error", "consistent"]
   }
 }
